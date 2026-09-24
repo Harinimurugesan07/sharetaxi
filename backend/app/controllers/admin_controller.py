@@ -273,6 +273,14 @@ def financial_summary():
 
 
 @role_required(UserRole.ADMIN)
+def report_breakdown():
+    try:
+        return success_response(admin_service.paginated_report_breakdown(request.args))
+    except (AdminServiceError, ValueError) as error:
+        return error_response(getattr(error, "message", str(error)), getattr(error, "status_code", 422))
+
+
+@role_required(UserRole.ADMIN)
 def list_driver_payout_requests():
     status = request.args.get("status")
 

@@ -7,12 +7,12 @@ import Badge from "../../components/Badge";
 import StarRating from "../../components/StarRating";
 import { LoadingState, ErrorState } from "../../components/States";
 import { formatCurrency } from "../../lib/format";
-import { myDriverProfile, setAvailability } from "../../api/driver";
+import { driverEarnings, myDriverProfile, setAvailability } from "../../api/driver";
 import { myTrips } from "../../api/trips";
 import { myVehicles } from "../../api/vehicles";
 import { useAuth } from "../../context/AuthContext";
 import { isOperatorOwnedDriver } from "../../lib/driverType";
-import { passengerCapacity, bookedSeats } from "../../lib/seats";
+import { passengerCapacity } from "../../lib/seats";
 import { useToast } from "../../context/ToastContext";
 
 import "./DriverDashboard.css";
@@ -31,16 +31,18 @@ export default function DriverDashboard() {
   const [driver, setDriver] = useState(null);
   const [trips, setTrips] = useState([]);
   const [vehicle, setVehicle] = useState(null);
+  const [earnings, setEarnings] = useState(null);
   const [status, setStatus] = useState("loading");
   const [toggling, setToggling] = useState(false);
 
   const load = async () => {
     setStatus("loading");
     try {
-      const [d, t, v] = await Promise.all([myDriverProfile(), myTrips(), myVehicles()]);
+      const [d, t, v, e] = await Promise.all([myDriverProfile(), myTrips(), myVehicles(), driverEarnings()]);
       setDriver(d);
       setTrips(t || []);
       setVehicle((v || [])[0] || null);
+      setEarnings(e || null);
       setStatus("success");
     } catch {
       setStatus("error");
@@ -76,17 +78,28 @@ export default function DriverDashboard() {
 
   const today = new Date().toDateString();
   const todaysTrips = trips.filter((t) => new Date(t.departure_time).toDateString() === today);
-  const todaysEarnings = todaysTrips
-    .filter((t) => t.status === "completed")
-    .reduce((s, t) => s + Number(t.fare_per_seat) * bookedSeats(t), 0);
+  const todayStart = new Date();
+  todayStart.setHours(0, 0, 0, 0);
+  const earningsRows = operatorOwned
+    ? earnings?.records || []
+    : (earnings?.transactions || []).filter(
+        (transaction) => transaction.transaction_type === "RIDE_EARNING"
+      );
+  const todaysEarnings = earningsRows
+    .filter((row) => new Date(row.created_at) >= todayStart)
+    .reduce(
+      (sum, row) => sum + Number(row.driver_earnings ?? row.amount ?? 0),
+      0,
+    );
   const isOnline = driver?.availability === "online";
 
   const stats = [
     { label: "Today's Trips", value: todaysTrips.length, icon: Route, hint: "+1 more than yesterday" },
     { label: "Passenger Seats", value: vehicle ? passengerCapacity(vehicle) : "—", icon: Armchair, hint: "driver seat excluded" },
     { label: "Today's Earnings", value: formatCurrency(todaysEarnings), icon: Wallet, hint: "vs. yesterday" },
+    { label: "Commission", value: formatCurrency(earnings?.summary?.total_commission ?? 0), icon: Wallet, hint: "platform commission" },
     { label: "Total Trips", value: driver?.total_trips ?? 0, icon: TrendingUp, hint: "since registration" },
-    { label: "Rating", value: Number(driver?.average_rating || 5).toFixed(1), icon: Star, hint: `${driver?.total_trips ?? 0} rides` },
+    { label: "Rating", value: driver?.average_rating == null ? "—" : Number(driver.average_rating).toFixed(1), icon: Star, hint: `${driver?.total_trips ?? 0} rides` },
   ];
 
   return (
@@ -106,7 +119,7 @@ export default function DriverDashboard() {
             <div className="driver-dashboard-profile-info">
               <p className="driver-dashboard-name">{user?.full_name}</p>
               <div className="driver-dashboard-rating">
-                <StarRating value={driver?.average_rating || 5} />
+                <StarRating value={driver?.average_rating ?? 0} />
                 <span>({driver?.total_trips ?? 0} trips)</span>
               </div>
               {isVerified && (

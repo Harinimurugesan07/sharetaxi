@@ -47,6 +47,11 @@ admin_bp.add_url_rule(
     view_func=admin_controller.financial_summary,
     methods=["GET"]
 )
+admin_bp.add_url_rule(
+    "/report-breakdown",
+    view_func=admin_controller.report_breakdown,
+    methods=["GET"],
+)
 
 
 admin_bp.add_url_rule(

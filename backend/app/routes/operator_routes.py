@@ -45,6 +45,12 @@ operator_bp.add_url_rule(
 )
 
 operator_bp.add_url_rule(
+    "/payouts",
+    view_func=operator_controller.payout_requests,
+    methods=["GET"],
+)
+
+operator_bp.add_url_rule(
     "/wallet",
     view_func=operator_controller.wallet,
     methods=["GET"]

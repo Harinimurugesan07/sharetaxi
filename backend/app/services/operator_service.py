@@ -151,22 +151,36 @@ def _booking_dict(booking):
     }
 
 
-def dashboard_stats():
+def _operator_trips(operator_id):
+    return Trip.query.join(Driver, Trip.driver_id == Driver.id).filter(
+        Driver.operator_id == operator_id
+    )
+
+
+def dashboard_stats(operator_id):
     start, end = _today_bounds()
+    trips = _operator_trips(operator_id)
     return {
-        "active_trips": Trip.query.filter_by(status=TripStatus.ONGOING).count(),
-        "scheduled_trips": Trip.query.filter_by(status=TripStatus.SCHEDULED).count(),
+        "active_trips": trips.filter(Trip.status == TripStatus.ONGOING).count(),
+        "scheduled_trips": trips.filter(Trip.status == TripStatus.SCHEDULED).count(),
         "online_drivers": Driver.query.filter(
+            Driver.operator_id == operator_id,
             Driver.availability.in_([DriverAvailability.ONLINE, DriverAvailability.ON_TRIP])
         ).count(),
-        "available_drivers": Driver.query.filter_by(availability=DriverAvailability.ONLINE).count(),
-        "pending_requests": Booking.query.filter_by(status=BookingStatus.PENDING_PAYMENT).count(),
-        "completed_today": Trip.query.filter(
+        "available_drivers": Driver.query.filter_by(
+            operator_id=operator_id,
+            availability=DriverAvailability.ONLINE,
+        ).count(),
+        "pending_requests": Booking.query.join(Trip).join(Driver).filter(
+            Driver.operator_id == operator_id,
+            Booking.status == BookingStatus.PENDING_PAYMENT,
+        ).count(),
+        "completed_today": trips.filter(
             Trip.status == TripStatus.COMPLETED,
             Trip.completed_at >= start,
             Trip.completed_at < end,
         ).count(),
-        "cancelled_today": Trip.query.filter(
+        "cancelled_today": trips.filter(
             Trip.status == TripStatus.CANCELLED,
             Trip.cancelled_at >= start,
             Trip.cancelled_at < end,
@@ -174,12 +188,14 @@ def dashboard_stats():
     }
 
 
-def list_live_trips():
-    return Trip.query.filter_by(status=TripStatus.ONGOING).order_by(Trip.started_at.desc()).all()
+def list_live_trips(operator_id):
+    return _operator_trips(operator_id).filter_by(
+        status=TripStatus.ONGOING,
+    ).order_by(Trip.started_at.desc()).all()
 
 
-def list_trips(status_filter=None):
-    query = Trip.query
+def list_trips(status_filter=None, operator_id=None):
+    query = _operator_trips(operator_id) if operator_id is not None else Trip.query
     if status_filter:
         if status_filter not in TripStatus.ALL:
             raise OperatorServiceError(f"status must be one of {TripStatus.ALL}", 422)
@@ -187,8 +203,13 @@ def list_trips(status_filter=None):
     return query.order_by(Trip.departure_time.desc()).all()
 
 
-def get_trip(trip_public_id):
-    trip = Trip.query.filter_by(public_id=trip_public_id).first()
+def get_trip(trip_public_id, operator_id=None):
+    query = Trip.query.filter_by(public_id=trip_public_id)
+    if operator_id is not None:
+        query = query.join(Driver, Trip.driver_id == Driver.id).filter(
+            Driver.operator_id == operator_id
+        )
+    trip = query.first()
     if not trip:
         raise OperatorServiceError("Trip not found", 404)
     return trip
@@ -664,6 +685,13 @@ def financial_summary(operator_id):
         for settlement in settlements
     )
 
+    total_admin_commission = sum(
+        (settlement.ride_revenue or 0)
+        - (settlement.driver_earnings or 0)
+        - (settlement.operator_share or 0)
+        for settlement in settlements
+    )
+
     total_operator_share = sum(
         (settlement.operator_share or 0)
         for settlement in settlements
@@ -698,6 +726,7 @@ def financial_summary(operator_id):
     return {
         "total_ride_revenue": float(total_ride_revenue),
         "total_driver_earnings": float(total_driver_earnings),
+        "total_admin_commission": float(total_admin_commission),
         "total_operator_share": float(total_operator_share),
         "total_driver_paid": float(total_driver_paid),
         "pending_driver_earnings": float(pending_driver_earnings),

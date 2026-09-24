@@ -21,7 +21,13 @@ import {
 } from "recharts";
 
 import Card from "../../components/Card";
-import { operatorDashboard, operatorDrivers } from "../../api/operator";
+import {
+  operatorDashboard,
+  operatorDrivers,
+  operatorFinancialSummary,
+  operatorPayoutRequests,
+} from "../../api/operator";
+import { formatCurrency } from "../../lib/format";
 import "./OperatorReports.css";
 
 const TRIP_STATUS_COLORS = {
@@ -59,13 +65,22 @@ function ChartEmptyState({ label }) {
 export default function OperatorReports() {
   const [stats, setStats] = useState(null);
   const [drivers, setDrivers] = useState([]);
+  const [financial, setFinancial] = useState(null);
+  const [payouts, setPayouts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    Promise.all([operatorDashboard(), operatorDrivers()])
-      .then(([dashboard, driverList]) => {
+    Promise.all([
+      operatorDashboard(),
+      operatorDrivers(),
+      operatorFinancialSummary(),
+      operatorPayoutRequests(),
+    ])
+      .then(([dashboard, driverList, financialSummary, payoutList]) => {
         setStats(dashboard);
         setDrivers(driverList || []);
+        setFinancial(financialSummary);
+        setPayouts(payoutList || []);
       })
       .catch(() => {})
       .finally(() => setLoading(false));
@@ -237,6 +252,56 @@ export default function OperatorReports() {
             </div>
           ))}
         </div>
+      </Card>
+
+      <Card className="operator-reports-card">
+        <p className="operator-reports-title">Your Earnings and Payouts</p>
+        <div className="operator-reports-list">
+          {[
+            ["Ride revenue", financial?.total_ride_revenue],
+            ["Admin commission", financial?.total_admin_commission],
+            ["Operator earnings", financial?.total_operator_share],
+            ["Driver earnings", financial?.total_driver_earnings],
+            ["Pending driver earnings", financial?.pending_driver_earnings],
+            ["Vehicle expenses", financial?.total_vehicle_expenses],
+          ].map(([label, value]) => (
+            <div key={label} className="operator-reports-row">
+              <span className="operator-reports-row-label">{label}</span>
+              <span className="operator-reports-row-value">
+                {formatCurrency(value ?? 0)}
+              </span>
+            </div>
+          ))}
+        </div>
+        <p className="operator-reports-title operator-payouts-heading">
+          Driver payout status
+        </p>
+        {payouts.length === 0 ? (
+          <ChartEmptyState label="No payout requests from your drivers." />
+        ) : (
+          <div className="operator-payout-table-wrap">
+            <table className="operator-payout-table">
+              <thead>
+                <tr>
+                  <th>Driver</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Requested</th>
+                </tr>
+              </thead>
+              <tbody>
+                {payouts.map((payout) => (
+                  <tr key={payout.id}>
+                    <th scope="row">{payout.driver_name || "Driver"}</th>
+                    <td>{formatCurrency(payout.amount || 0)}</td>
+                    <td>{payout.status || "unknown"}</td>
+                    <td>{payout.created_at ? new Date(payout.created_at).toLocaleString() : "—"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </Card>
     </div>
   );

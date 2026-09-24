@@ -52,9 +52,14 @@ def create_operator(data):
 
 
 def dashboard_stats():
+    paid_payments = Payment.query.filter_by(status="paid")
+    payouts = DriverPayoutRequest.query
     return {
+        "total_users": User.query.count(),
+        "total_operators": User.query.filter_by(role=UserRole.OPERATOR).count(),
         "total_passengers": Customer.query.count(),
         "total_drivers": Driver.query.count(),
+        "freelance_drivers": Driver.query.filter(Driver.operator_id.is_(None)).count(),
         "drivers_pending_verification": Driver.query.filter_by(
             verification_status=DriverStatus.PENDING
         ).count(),
@@ -67,6 +72,32 @@ def dashboard_stats():
         "trips_scheduled": Trip.query.filter_by(status=TripStatus.SCHEDULED).count(),
         "trips_ongoing": Trip.query.filter_by(status=TripStatus.ONGOING).count(),
         "trips_completed": Trip.query.filter_by(status=TripStatus.COMPLETED).count(),
+        "trips_pending": Trip.query.filter(
+            Trip.status.in_([TripStatus.SCHEDULED, TripStatus.ONGOING])
+        ).count(),
+        "total_commission": float(
+            sum((payment.admin_amount or 0) for payment in paid_payments.all())
+        ),
+        "payout_requested": float(
+            sum((payout.amount or 0) for payout in payouts.all())
+        ),
+        "payout_paid": float(
+            sum(
+                (payout.amount or 0)
+                for payout in DriverPayoutRequest.query.filter_by(status="paid").all()
+            )
+        ),
+        "payout_pending": float(
+            sum(
+                (payout.amount or 0)
+                for payout in DriverPayoutRequest.query.filter(
+                    DriverPayoutRequest.status.in_(["pending", "approved", "processing"])
+                ).all()
+            )
+        ),
+        "payout_pending_count": DriverPayoutRequest.query.filter(
+            DriverPayoutRequest.status.in_(["pending", "approved", "processing"])
+        ).count(),
     }
 
 
@@ -346,16 +377,256 @@ def financial_summary():
         total_operator_share - total_vehicle_expenses
     )
 
+    total_payout_requested = sum((payout.amount or 0) for payout in DriverPayoutRequest.query.all())
+    pending_payouts = [
+        payout
+        for payout in DriverPayoutRequest.query.all()
+        if payout.status in ("pending", "approved", "processing")
+    ]
+    freelance_driver_earnings = sum(
+        (payment.driver_amount or 0)
+        for payment in payments
+        if payment.trip and payment.trip.driver and payment.trip.driver.operator_id is None
+    )
+
     return {
         "total_ride_revenue": float(total_ride_revenue),
         "total_admin_amount": float(total_admin_amount),
+        "total_earnings": float(total_driver_earnings + total_operator_share),
         "total_driver_earnings": float(total_driver_earnings),
+        "freelance_driver_earnings": float(freelance_driver_earnings),
         "total_operator_share": float(total_operator_share),
         "total_driver_paid": float(total_driver_paid),
         "pending_driver_earnings": float(pending_driver_earnings),
         "settled_operator_share": float(settled_operator_share),
         "total_vehicle_expenses": float(total_vehicle_expenses),
         "net_operator_amount": float(net_operator_amount),
+        "total_payout_requested": float(total_payout_requested),
+        "pending_payout": float(sum((payout.amount or 0) for payout in pending_payouts)),
+        "commission_breakdown": _commission_breakdown(),
+    }
+
+
+def paginated_report_breakdown(params):
+    try:
+        page = max(1, int(params.get("page", 1)))
+        per_page = min(100, max(10, int(params.get("per_page", 25))))
+    except (TypeError, ValueError):
+        raise AdminServiceError("page and per_page must be valid numbers", 422)
+
+    search = (params.get("search") or "").strip()
+    operator_id = params.get("operator_id")
+    category = params.get("category")
+    status = params.get("status")
+    date_from = params.get("date_from")
+    date_to = params.get("date_to")
+
+    query = Payment.query.join(Trip, Payment.trip_id == Trip.id).join(
+        Driver, Trip.driver_id == Driver.id
+    ).filter(Payment.status == "paid")
+
+    if operator_id:
+        query = query.filter(Driver.operator_id == int(operator_id))
+    if category == "freelance":
+        query = query.filter(Driver.operator_id.is_(None))
+    elif category == "operator":
+        query = query.filter(Driver.operator_id.isnot(None))
+    if status:
+        if status not in TripStatus.ALL:
+            raise AdminServiceError(f"status must be one of {TripStatus.ALL}", 422)
+        query = query.filter(Trip.status == status)
+    if search:
+        term = f"%{search}%"
+        query = query.join(User, User.id == Driver.user_id).filter(
+            or_(User.full_name.ilike(term), Trip.origin_name.ilike(term), Trip.destination_name.ilike(term))
+        )
+    if date_from:
+        query = query.filter(Trip.departure_time >= datetime.fromisoformat(date_from))
+    if date_to:
+        query = query.filter(Trip.departure_time <= datetime.fromisoformat(date_to))
+
+    sort_map = {
+        "date": Trip.departure_time,
+        "commission": Payment.admin_amount,
+        "earnings": Payment.driver_amount,
+        "revenue": Payment.gross_amount,
+    }
+    sort = params.get("sort", "date")
+    sort_column = sort_map.get(sort, Trip.departure_time)
+    if params.get("direction", "desc") == "asc":
+        query = query.order_by(sort_column.asc())
+    else:
+        query = query.order_by(sort_column.desc())
+
+    pagination = query.paginate(page=page, per_page=per_page, error_out=False)
+    return {
+        "items": [
+            {
+                "id": payment.trip.public_id,
+                "route": f"{payment.trip.origin_name} -> {payment.trip.destination_name}",
+                "departure_time": payment.trip.departure_time.isoformat() if payment.trip.departure_time else None,
+                "category": "freelance" if payment.trip.driver.operator_id is None else "operator",
+                "driver_name": payment.trip.driver.user.full_name if payment.trip.driver.user else "Driver",
+                "operator_name": payment.trip.driver.operator.full_name if payment.trip.driver.operator else None,
+                "ride_revenue": float(payment.gross_amount or 0),
+                "admin_commission": float(payment.admin_amount or 0),
+                "operator_earnings": float(payment.operator_amount or 0),
+                "driver_earnings": float(payment.driver_amount or 0),
+            }
+            for payment in pagination.items
+        ],
+        "page": pagination.page,
+        "per_page": pagination.per_page,
+        "total": pagination.total,
+        "pages": pagination.pages,
+    }
+
+
+def _commission_breakdown():
+    def empty_row(identifier, name, driver_type):
+        return {
+            "id": identifier,
+            "name": name,
+            "driver_type": driver_type,
+            "trip_count": 0,
+            "ride_revenue": 0.0,
+            "admin_commission": 0.0,
+            "operator_earnings": 0.0,
+            "driver_earnings": 0.0,
+            "payout_requested": 0.0,
+            "payout_pending": 0.0,
+            "payout_paid": 0.0,
+            "payout_status_counts": {},
+        }
+
+    operator_rows = {}
+    for operator in User.query.filter_by(role=UserRole.OPERATOR).all():
+        operator_rows[operator.id] = {
+            **empty_row(operator.public_id, operator.full_name, "operator"),
+            "drivers": {},
+        }
+
+    freelance_rows = {}
+    for driver in Driver.query.all():
+        if driver.operator_id is not None:
+            operator_rows.setdefault(
+                driver.operator_id,
+                {
+                    **empty_row(
+                        driver.operator.public_id,
+                                driver.operator.full_name if driver.operator else "Operator",
+                        "operator",
+                    ),
+                    "drivers": {},
+                },
+            )
+            operator_rows[driver.operator_id]["drivers"][driver.id] = empty_row(
+                driver.public_id,
+                driver.user.full_name if driver.user else "Driver",
+                "operator_driver",
+            )
+        else:
+            freelance_rows[driver.id] = empty_row(
+                driver.public_id,
+                driver.user.full_name if driver.user else "Driver",
+                "freelance",
+            )
+
+    payments = (
+        Payment.query
+        .join(Trip, Payment.trip_id == Trip.id)
+        .join(Driver, Trip.driver_id == Driver.id)
+        .filter(Payment.status == "paid")
+        .all()
+    )
+    def add_payment(row, payment):
+        row["trip_count"] += 1
+        row["ride_revenue"] += float(payment.gross_amount or 0)
+        row["admin_commission"] += float(payment.admin_amount or 0)
+        row["operator_earnings"] += float(payment.operator_amount or 0)
+        row["driver_earnings"] += float(payment.driver_amount or 0)
+
+    def add_payout(row, payout):
+        amount = float(payout.amount or 0)
+        row["payout_requested"] += amount
+        if payout.status in ("pending", "approved", "processing"):
+            row["payout_pending"] += amount
+        if payout.status == "paid":
+            row["payout_paid"] += amount
+        status_counts = row["payout_status_counts"]
+        status_counts[payout.status] = status_counts.get(payout.status, 0) + 1
+
+    for payment in payments:
+        driver = payment.trip.driver
+        if driver.operator_id is None:
+            row = freelance_rows.setdefault(
+                driver.id,
+                empty_row(
+                    driver.public_id,
+                    driver.user.full_name if driver.user else "Driver",
+                    "freelance",
+                ),
+            )
+            add_payment(row, payment)
+            continue
+
+        operator_row = operator_rows[driver.operator_id]
+        add_payment(operator_row, payment)
+        add_payment(operator_row["drivers"][driver.id], payment)
+
+    for payout in DriverPayoutRequest.query.all():
+        if payout.driver and payout.operator_id is None:
+            row = freelance_rows.setdefault(
+                payout.driver.id,
+                empty_row(
+                    payout.driver.public_id,
+                    payout.driver.user.full_name if payout.driver.user else "Driver",
+                    "freelance",
+                ),
+            )
+            add_payout(row, payout)
+        elif payout.driver and payout.operator_id in operator_rows:
+            operator_row = operator_rows[payout.operator_id]
+            driver_row = operator_row["drivers"].setdefault(
+                payout.driver.id,
+                empty_row(
+                    payout.driver.public_id,
+                    payout.driver.user.full_name if payout.driver.user else "Driver",
+                    "operator_driver",
+                ),
+            )
+            add_payout(driver_row, payout)
+
+    for settlement in OperatorSettlement.query.all():
+        operator_row = operator_rows.get(settlement.operator_id)
+        if operator_row:
+            amount = float(settlement.operator_share or 0)
+            operator_row["payout_requested"] += amount
+            if settlement.status == "pending":
+                operator_row["payout_pending"] += amount
+            if settlement.status == "settled":
+                operator_row["payout_paid"] += amount
+            status_counts = operator_row["payout_status_counts"]
+            status_counts[settlement.status] = status_counts.get(settlement.status, 0) + 1
+
+    def serialize_operator(row):
+        return {
+            **{key: value for key, value in row.items() if key != "drivers"},
+            "drivers": sorted(
+                row["drivers"].values(),
+                key=lambda driver: driver["name"].lower(),
+            ),
+        }
+
+    return {
+        "operators": sorted(
+            (serialize_operator(row) for row in operator_rows.values()),
+            key=lambda operator: operator["name"].lower(),
+        ),
+        "freelance_drivers": sorted(
+            freelance_rows.values(),
+            key=lambda driver: driver["name"].lower(),
+        ),
     }
 
 
@@ -371,9 +642,7 @@ def get_driver_payout_requests(status=None):
         paid
     """
 
-    query = DriverPayoutRequest.query.filter(
-    DriverPayoutRequest.operator_id.is_(None)
-)
+    query = DriverPayoutRequest.query
 
     if status:
        query = query.filter_by(

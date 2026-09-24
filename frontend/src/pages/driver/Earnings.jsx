@@ -45,7 +45,6 @@ import { useAuth } from "../../context/AuthContext";
 
 import { isOperatorOwnedDriver } from "../../lib/driverType";
 
-import { bookedSeats } from "../../lib/seats";
 
 import {
   getDriverWallet,
@@ -62,14 +61,6 @@ const ROUTE_BAR_COLORS = [
   "#9FB4FF",
   "#C3D0FF",
 ];
-
-
-function tripEarning(t) {
-  return (
-    Number(t.fare_per_seat) *
-    bookedSeats(t)
-  );
-}
 
 
 function TrendTooltip({
@@ -217,9 +208,7 @@ export default function Earnings() {
           const settlement =
             await driverEarnings();
 
-          setSettlementData(
-            settlement
-          );
+          setSettlementData(settlement);
 
           // Operator drivers don't use
           // freelance wallet.
@@ -247,7 +236,7 @@ export default function Earnings() {
 
           // Freelance drivers don't use
           // operator settlement.
-          setSettlementData(null);
+          setSettlementData(settlement);
         }
 
         setStatus("success");
@@ -336,13 +325,11 @@ export default function Earnings() {
     now.toDateString();
 
 
-  const isSameWeek = (d) =>
-    now - d <
-    7 *
-      24 *
-      60 *
-      60 *
-      1000;
+  const isSameWeek = (d) => {
+    const start = new Date(now);
+    start.setDate(now.getDate() - 7);
+    return d <= now && d >= start;
+  };
 
 
   const isSameMonth = (d) =>
@@ -350,27 +337,6 @@ export default function Earnings() {
       now.getMonth() &&
     d.getFullYear() ===
       now.getFullYear();
-
-
-  /*
-   * Existing trip-based earning calculation.
-   * Used for completed trips and charts.
-   */
-  const sumFor = (predicate) =>
-    trips
-      .filter((t) =>
-        predicate(
-          new Date(
-            t.completed_at ||
-              t.departure_time
-          )
-        )
-      )
-      .reduce(
-        (sum, t) =>
-          sum + tripEarning(t),
-        0
-      );
 
 
   /*
@@ -409,13 +375,15 @@ export default function Earnings() {
    * Uses settlement records.
    *
    * Freelance Driver:
-   * Uses completed trips.
+   * Uses wallet earning transactions.
    */
   const trendData = useMemo(() => {
     const source =
       operatorView
         ? settlementData.records || []
-        : trips;
+        : walletTransactions.filter(
+            (transaction) => transaction.transaction_type === "RIDE_EARNING"
+          );
 
     const sorted = [...source].sort(
       (a, b) =>
@@ -437,7 +405,7 @@ export default function Earnings() {
           ? Number(
               t.driver_earnings || 0
             )
-          : tripEarning(t);
+          : Number(t.amount || 0);
 
       running += earning;
 
@@ -450,8 +418,7 @@ export default function Earnings() {
         ).slice(0, 6),
 
         route:
-          t.route ||
-          `${t.origin_name} → ${t.destination_name}`,
+          t.route || t.description || "Wallet earning",
 
         earning,
 
@@ -460,6 +427,7 @@ export default function Earnings() {
     });
   }, [
     trips,
+    walletTransactions,
     settlementData,
     operatorView,
   ]);
@@ -472,15 +440,14 @@ export default function Earnings() {
     const source =
       operatorView
         ? settlementData.records || []
-        : trips;
+        : walletTransactions.filter(
+            (transaction) => transaction.transaction_type === "RIDE_EARNING"
+          );
 
     const totals = source.reduce(
       (acc, t) => {
         const route = (
-          t.route ||
-          `${t.origin_name || ""} → ${
-            t.destination_name || ""
-          }`
+          t.route || t.description || "Wallet earning"
         )
           .replace(/\s+/g, " ")
           .trim();
@@ -494,7 +461,7 @@ export default function Earnings() {
             ? Number(
                 t.driver_earnings || 0
               )
-            : tripEarning(t);
+            : Number(t.amount || 0);
 
         acc[route] =
           (acc[route] || 0) +
@@ -521,6 +488,7 @@ export default function Earnings() {
       .slice(0, 5);
   }, [
     trips,
+    walletTransactions,
     settlementData,
     operatorView,
   ]);
@@ -650,6 +618,11 @@ export default function Earnings() {
               .total_earnings,
           icon: Wallet,
         },
+        {
+          label: "Commission",
+          value: settlementData.summary.total_commission,
+          icon: Banknote,
+        },
 
         {
           label: "Pending Settlement",
@@ -701,6 +674,11 @@ export default function Earnings() {
             wallet?.total_earned || 0
           ),
           icon: Wallet,
+        },
+        {
+          label: "Commission",
+          value: settlementData?.summary?.total_commission || 0,
+          icon: Banknote,
         },
 
         {
@@ -1216,7 +1194,9 @@ export default function Earnings() {
             )}
 
           {!operatorDriver &&
-            trips.length === 0 && (
+            walletTransactions.filter(
+              (transaction) => transaction.transaction_type === "RIDE_EARNING"
+            ).length === 0 && (
               <p className="earnings-no-trips">
                 No completed trips yet.
               </p>
@@ -1224,15 +1204,16 @@ export default function Earnings() {
 
           {(operatorDriver
             ? earningsRecords
-            : trips
+            : walletTransactions.filter(
+                (transaction) => transaction.transaction_type === "RIDE_EARNING"
+              )
           ).map((t) => {
             const earning =
               operatorDriver
                 ? Number(
-                    t.driver_earnings ||
-                      0
+                    t.driver_earnings || 0
                   )
-                : tripEarning(t);
+                : Number(t.amount || 0);
 
             return (
               <div
@@ -1243,14 +1224,14 @@ export default function Earnings() {
                   <p className="earnings-trip-route">
                     {operatorDriver
                       ? t.route
-                      : `${t.origin_name} → ${t.destination_name}`}
+                      : t.description || "Wallet earning"}
                   </p>
 
                   <p className="earnings-trip-date">
                     {formatDate(
                       operatorDriver
                         ? t.created_at
-                        : t.departure_time
+                        : t.created_at
                     )}
                   </p>
                 </div>

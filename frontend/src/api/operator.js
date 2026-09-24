@@ -54,3 +54,13 @@ export const operatorVehicles = () =>
 
 export const operatorWallet = () =>
   request({ method: "GET", url: "/operator/wallet" });
+
+export const operatorFinancialSummary = () =>
+  request({ method: "GET", url: "/operator/financial-summary" });
+
+export const operatorPayoutRequests = (status) =>
+  request({
+    method: "GET",
+    url: "/operator/payouts",
+    params: status ? { status } : {},
+  });

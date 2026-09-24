@@ -219,6 +219,8 @@ export default function PayoutRequests() {
           <table className="admin-payout-table">
             <thead>
               <tr>
+                <th>Category</th>
+                <th>Operator</th>
                 <th>Driver</th>
                 <th>Amount</th>
                 <th>Bank</th>
@@ -237,6 +239,10 @@ export default function PayoutRequests() {
 
                 return (
                   <tr key={item.id}>
+                    <td>
+                      {item.operator_id ? "Operator driver" : "Freelance driver"}
+                    </td>
+                    <td>{item.operator_name || "Admin-managed"}</td>
                     <td>
                       <strong>
                         {item.driver_name ||

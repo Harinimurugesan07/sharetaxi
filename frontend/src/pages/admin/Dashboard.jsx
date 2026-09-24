@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Users, IdCard, CarFront, Route, IndianRupee, ShieldCheck } from "lucide-react";
+import { Users, IdCard, CarFront, Route, IndianRupee, ShieldCheck, UserRound, Clock3, WalletCards } from "lucide-react";
 import Card from "../../components/Card";
 import { LoadingState, ErrorState } from "../../components/States";
 import { formatCurrency } from "../../lib/format";
@@ -25,12 +25,19 @@ export default function AdminDashboard() {
   if (status === "error") return <ErrorState onRetry={load} />;
 
   const cards = [
-    { label: "Total Users", value: stats?.total_users ?? "—", icon: Users },
-    { label: "Total Drivers", value: stats?.total_drivers ?? "—", icon: IdCard },
-    { label: "Verified Drivers", value: stats?.verified_drivers ?? "—", icon: ShieldCheck },
+    { label: "Total Users", value: stats?.total_users ?? 0, icon: Users },
+    { label: "Total Operators", value: stats?.total_operators ?? 0, icon: UserRound },
+    { label: "Total Drivers", value: stats?.total_drivers ?? 0, icon: IdCard },
+    { label: "Freelance Drivers", value: stats?.freelance_drivers ?? 0, icon: UserRound },
+    { label: "Verified Drivers", value: stats?.drivers_verified ?? 0, icon: ShieldCheck },
     { label: "Total Vehicles", value: stats?.total_vehicles ?? "—", icon: CarFront },
-    { label: "Total Trips", value: stats?.total_trips ?? "—", icon: Route },
-    { label: "Total Revenue", value: formatCurrency(stats?.total_revenue ?? 0), icon: IndianRupee },
+    { label: "Total Trips", value: stats?.total_trips ?? 0, icon: Route },
+    { label: "Completed Trips", value: stats?.trips_completed ?? 0, icon: Route },
+    { label: "Pending Trips", value: stats?.trips_pending ?? 0, icon: Clock3 },
+    { label: "Total Commission", value: formatCurrency(stats?.total_commission ?? 0), icon: IndianRupee },
+    { label: "Payouts Requested", value: formatCurrency(stats?.payout_requested ?? 0), icon: WalletCards },
+    { label: "Payouts Pending", value: formatCurrency(stats?.payout_pending ?? 0), icon: WalletCards },
+    { label: "Payouts Paid", value: formatCurrency(stats?.payout_paid ?? 0), icon: WalletCards },
   ];
 
   return (
@@ -49,18 +56,6 @@ export default function AdminDashboard() {
         ))}
       </div>
 
-      <Card className="admin-activity-card">
-        <p className="admin-activity-title">Recent activity</p>
-        {stats?.recent_activity?.length ? (
-          <div className="admin-activity-list">
-            {stats.recent_activity.map((a, i) => (
-              <div key={i} className="admin-activity-item">{a.message || JSON.stringify(a)}</div>
-            ))}
-          </div>
-        ) : (
-          <p className="admin-no-activity">No recent activity to show.</p>
-        )}
-      </Card>
     </div>
   );
 }

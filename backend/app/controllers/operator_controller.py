@@ -18,16 +18,18 @@ def _handle_error(error):
 @role_required(UserRole.OPERATOR)
 @verified_subscribed_required
 def dashboard():
-    return success_response(operator_service.dashboard_stats())
+    operator_id = int(get_jwt_identity())
+    return success_response(operator_service.dashboard_stats(operator_id))
 
 
 @role_required(UserRole.OPERATOR)
 @verified_subscribed_required
 def live_trips():
+    operator_id = int(get_jwt_identity())
     return success_response(
         [
             operator_service._trip_dict(trip)
-            for trip in operator_service.list_live_trips()
+            for trip in operator_service.list_live_trips(operator_id)
         ]
     )
 
@@ -35,8 +37,12 @@ def live_trips():
 @role_required(UserRole.OPERATOR)
 @verified_subscribed_required
 def trips():
+    operator_id = int(get_jwt_identity())
     try:
-        items = operator_service.list_trips(request.args.get("status"))
+        items = operator_service.list_trips(
+            request.args.get("status"),
+            operator_id,
+        )
     except OperatorServiceError as error:
         return _handle_error(error)
 
@@ -51,8 +57,9 @@ def trips():
 @role_required(UserRole.OPERATOR)
 @verified_subscribed_required
 def trip_detail(trip_id):
+    operator_id = int(get_jwt_identity())
     try:
-        trip = operator_service.get_trip(trip_id)
+        trip = operator_service.get_trip(trip_id, operator_id)
     except OperatorServiceError as error:
         return _handle_error(error)
 
@@ -347,6 +354,21 @@ def financial_summary():
         return _handle_error(error)
 
     return success_response(summary)
+
+
+@role_required(UserRole.OPERATOR)
+@verified_subscribed_required
+def payout_requests():
+    operator_id = int(get_jwt_identity())
+    try:
+        requests = operator_service.list_driver_payout_requests(
+            operator_id,
+            request.args.get("status"),
+        )
+    except OperatorServiceError as error:
+        return _handle_error(error)
+
+    return success_response([item.to_dict() for item in requests])
 
 
 @role_required(UserRole.OPERATOR)

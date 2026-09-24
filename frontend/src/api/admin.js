@@ -69,13 +69,11 @@ export const adminFinancialSummary = () =>
   });
 
 
-  export const adminDriverPayoutRequests = (status = "pending") =>
+  export const adminDriverPayoutRequests = (status) =>
   request({
     method: "GET",
     url: "/admin/driver-payouts",
-    params: {
-      status,
-    },
+      params: status ? { status } : {},
   });
 
 export const adminApproveDriverPayout = (payoutRequestId) =>
@@ -121,4 +119,11 @@ export const updateAdminPaymentSplitSettings = (data) =>
     method: "PUT",
     url: "/admin/payment-split",
     data,
+  });
+
+export const adminReportBreakdown = (params = {}) =>
+  request({
+    method: "GET",
+    url: "/admin/report-breakdown",
+    params,
   });

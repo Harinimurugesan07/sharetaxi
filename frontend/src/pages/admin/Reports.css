@@ -64,6 +64,15 @@
   color: var(--color-navy-400);
 }
 
+.reports-financial-grid {
+  margin-top: 1rem;
+}
+
+.reports-financial-grid .reports-tile {
+  min-height: 7.5rem;
+  justify-content: space-between;
+}
+
 /* Tone variants — icon badge color per metric ---------------------------- */
 
 .reports-tile-blue .reports-tile-icon {
@@ -89,6 +98,330 @@
 .reports-tile-cyan .reports-tile-icon {
   background: rgba(6, 182, 212, 0.14);
   color: #0891b2;
+}
+
+.commission-section {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.commission-groups {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.commission-group {
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  background: #fff;
+}
+
+.commission-group h3,
+.commission-group h4 {
+  margin: 0;
+  color: var(--color-navy-800);
+}
+
+.commission-group h3 {
+  font-size: 1rem;
+}
+
+.commission-group h4 {
+  margin-top: 1.25rem;
+  font-size: 0.85rem;
+}
+
+.commission-group-freelance {
+  margin-top: 1rem;
+}
+
+.commission-group-trips {
+  margin-top: 1rem;
+}
+
+.report-filter-bar {
+  display: grid;
+  grid-template-columns: minmax(12rem, 1.5fr) repeat(5, minmax(8rem, 1fr));
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.report-filter-bar input,
+.report-filter-bar select,
+.report-sort-button,
+.report-pagination button {
+  min-width: 0;
+  min-height: 2.35rem;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid #dbe3ef;
+  border-radius: 0.45rem;
+  background: #fff;
+  color: var(--color-navy-800);
+  font: inherit;
+  font-size: 0.75rem;
+}
+
+.report-filter-bar input:focus,
+.report-filter-bar select:focus {
+  outline: 2px solid rgba(49, 91, 220, 0.2);
+  border-color: #315bdc;
+}
+
+.report-sort-button {
+  cursor: pointer;
+  color: #315bdc;
+  font-weight: 700;
+}
+
+.report-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  color: var(--color-navy-400);
+  font-size: 0.75rem;
+}
+
+.report-pagination button {
+  cursor: pointer;
+  color: var(--color-navy-800);
+}
+
+.report-pagination button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.commission-records,
+.trip-records {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 0.85rem;
+}
+
+.commission-record {
+  padding: 0.9rem;
+  border: 1px solid #e8edf5;
+  border-radius: 0.65rem;
+  background: #fbfcfe;
+}
+
+.commission-record-header,
+.trip-record-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.commission-trip-count {
+  flex: 0 0 auto;
+  padding: 0.3rem 0.55rem;
+  border-radius: 999px;
+  background: #eef4ff;
+  color: #315bdc;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.commission-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin-top: 0.85rem;
+}
+
+.commission-metric {
+  min-width: 0;
+  padding: 0.65rem;
+  border-radius: 0.45rem;
+  background: #fff;
+}
+
+.commission-metric span,
+.trip-record-financials b,
+.trip-record-meta b {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--color-navy-400);
+  font-size: 0.66rem;
+  font-weight: 700;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.commission-metric strong {
+  display: block;
+  overflow-wrap: anywhere;
+  color: var(--color-navy-800);
+  font-size: 0.85rem;
+}
+
+.trip-record {
+  padding: 1rem;
+  border: 1px solid #e8edf5;
+  border-radius: 0.65rem;
+  background: #fbfcfe;
+}
+
+.trip-record-heading strong,
+.trip-record-heading span,
+.trip-record-meta span {
+  display: block;
+}
+
+.trip-record-heading strong {
+  color: var(--color-navy-800);
+  font-size: 0.85rem;
+}
+
+.trip-record-heading > div > span {
+  margin-top: 0.25rem;
+  color: var(--color-navy-400);
+  font-size: 0.7rem;
+}
+
+.trip-category {
+  flex: 0 0 auto;
+  padding: 0.3rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.trip-category-operator {
+  background: #eef4ff;
+  color: #315bdc;
+}
+
+.trip-category-freelance {
+  background: #ecfdf3;
+  color: #15803d;
+}
+
+.trip-record-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 0.9rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #e8edf5;
+  color: var(--color-navy-800);
+  font-size: 0.8rem;
+}
+
+.trip-record-financials {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin-top: 0.75rem;
+}
+
+.trip-record-financials span {
+  padding: 0.65rem;
+  border-radius: 0.45rem;
+  background: #fff;
+}
+
+.trip-record-financials strong {
+  color: var(--color-navy-800);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 720px) {
+  .report-filter-bar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .commission-metrics,
+  .trip-record-financials {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .report-filter-bar {
+    grid-template-columns: 1fr;
+  }
+
+  .report-pagination {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .commission-record-header,
+  .trip-record-heading {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .commission-metrics,
+  .trip-record-meta,
+  .trip-record-financials {
+    grid-template-columns: 1fr;
+  }
+}
+
+.commission-table-wrap {
+  margin-top: 0.75rem;
+  overflow-x: auto;
+}
+
+.commission-table {
+  width: 100%;
+  min-width: 700px;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.commission-trip-table {
+  min-width: 980px;
+}
+
+.commission-table th,
+.commission-table td {
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid #eef0f3;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.commission-table th:first-child,
+.commission-table td:first-child {
+  text-align: left;
+}
+
+.commission-table thead th {
+  color: var(--color-navy-400);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.commission-table tbody th {
+  font-weight: 600;
+}
+
+.commission-name,
+.commission-type {
+  display: block;
+}
+
+.commission-type {
+  margin-top: 0.15rem;
+  color: var(--color-navy-400);
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.commission-empty {
+  margin: 0.75rem 0 0;
+  color: var(--color-navy-400);
+  font-size: 0.8rem;
 }
 
 /* Revenue — the headline number gets its own highlighted strip ----------- */

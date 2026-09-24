@@ -6,10 +6,14 @@ from app.extensions import db
 from app.models.booking import Booking
 from app.models.driver import Driver
 from app.models.trip import Trip
+from app.models.payment import Payment
 from app.models.operator_settlement import OperatorSettlement
 from app.models.operator_settlement_transaction import (
     OperatorSettlementTransaction,
 )
+from app.models.driver_wallet import DriverWallet
+from app.models.driver_wallet_transaction import DriverWalletTransaction
+from app.models.driver_payout_request import DriverPayoutRequest
 
 from app.utils.constants import DriverAvailability, DriverStatus
 from app.utils.validators import is_valid_license_number
@@ -341,15 +345,46 @@ def get_earnings(user_id):
     driver = get_driver_by_user_id(user_id)
 
     if driver.operator_id is None:
+        wallet = DriverWallet.query.filter_by(driver_id=driver.id).first()
+        transactions = DriverWalletTransaction.query.filter_by(
+            driver_id=driver.id,
+        ).order_by(DriverWalletTransaction.created_at.desc()).all()
+        payouts = DriverPayoutRequest.query.filter_by(
+            driver_id=driver.id,
+        ).order_by(DriverPayoutRequest.created_at.desc()).all()
         return {
             "driver_type": "freelance",
             "summary": {
-                "total_earnings": 0,
-                "pending_settlement": 0,
-                "settled_amount": 0,
+                "total_earnings": float(wallet.total_earned if wallet else 0),
+                "pending_settlement": float(
+                    sum(
+                        (payout.amount or 0)
+                        for payout in payouts
+                        if payout.status in ("pending", "approved", "processing")
+                    )
+                ),
+                "settled_amount": float(
+                    sum(
+                        (payout.amount or 0)
+                        for payout in payouts
+                        if payout.status == "paid"
+                    )
+                ),
+                "total_commission": float(
+                    sum(
+                        (payment.admin_amount or 0)
+                        for payment in Payment.query.join(
+                            Trip, Payment.trip_id == Trip.id
+                        ).filter(
+                            Trip.driver_id == driver.id,
+                            Payment.status == "paid",
+                        ).all()
+                    )
+                ),
             },
             "records": [],
-            "transactions": [],
+            "transactions": [transaction.to_dict() for transaction in transactions],
+            "payouts": [payout.to_dict() for payout in payouts],
         }
 
     records = (
@@ -414,6 +449,14 @@ def get_earnings(user_id):
                     if transaction.status == "processed"
                 )
             ),
+            "total_commission": float(
+                sum(
+                    (record.ride_revenue or 0)
+                    - (record.driver_earnings or 0)
+                    - (record.operator_share or 0)
+                    for record in records
+                )
+            ),
         },
 
         "records": [
@@ -425,6 +468,7 @@ def get_earnings(user_id):
             transaction.to_dict()
             for transaction in transactions
         ],
+        "payouts": [],
     }
 
 
