@@ -1,0 +1,116 @@
+/* =========================================
+   Public pages: How It Works / Safety / About
+   src/pages/PublicPages.css
+========================================= */
+
+.public-page {
+  min-height: 100vh;
+  background: #f5f7fb; /* was bg-bg */
+}
+
+.public-page-container {
+  width: 100%;
+  max-width: 896px; /* max-w-4xl */
+  margin: 0 auto;
+  padding: 56px 16px; /* py-14 px-4 */
+}
+
+@media (min-width: 640px) {
+  .public-page-container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .public-page-container {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+.public-page-title {
+  font-size: 30px;
+  font-weight: 800;
+  color: #0b183f; /* navy-800 */
+  margin: 0;
+}
+
+.public-page-subtitle {
+  margin-top: 8px;
+  color: #8792a8; /* navy-400 */
+}
+
+/* ---- How It Works ---- */
+
+.howitworks-grid {
+  margin-top: 32px;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .howitworks-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.howitworks-card {
+  display: flex;
+  gap: 16px;
+  padding: 20px;
+}
+
+.howitworks-number {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: #173b8f; /* navy-700 */
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.howitworks-card-title {
+  margin: 0;
+  font-weight: 700;
+  color: #0b183f; /* navy-800 */
+}
+
+.howitworks-card-desc {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: #8792a8; /* navy-400 */
+}
+
+/* ---- Safety ---- */
+
+.safety-card {
+  margin-top: 32px;
+  padding: 0 !important;
+}
+
+.safety-item {
+  padding: 20px;
+  font-size: 14px;
+  color: #2c3752; /* navy-700 */
+  border-bottom: 1px solid #eef1f7; /* divide-navy-50 */
+}
+
+.safety-item:last-child {
+  border-bottom: none;
+}
+
+/* ---- About ---- */
+
+.about-text {
+  margin-top: 16px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #4c5878; /* navy-600 */
+}

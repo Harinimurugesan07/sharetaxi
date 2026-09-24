@@ -1,0 +1,169 @@
+/* =========================================
+   Admin Dashboard
+   ========================================= */
+
+.admin-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* =========================================
+   Statistics Grid
+   ========================================= */
+
+.admin-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+/* =========================================
+   Statistic Card
+   ========================================= */
+
+.admin-stat-card {
+  padding: 1.25rem;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.admin-stat-card:hover {
+  transform: translateY(-2px);
+}
+
+.admin-stat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.admin-stat-label {
+  margin: 0;
+
+      color: #0b183f;
+
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+}
+
+.admin-stat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 2.25rem;
+  height: 2.25rem;
+
+  flex-shrink: 0;
+
+  border-radius: 0.5rem;
+
+  background: var(--color-navy-50);
+
+  color: var(--color-navy-700);
+}
+
+.admin-stat-icon svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.admin-stat-value {
+  margin: 0.75rem 0 0;
+
+  color: var(--color-navy-800);
+
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 800;
+
+  letter-spacing: -0.02em;
+}
+
+/* =========================================
+   Recent Activity
+   ========================================= */
+
+.admin-activity-card {
+  padding: 1.25rem;
+}
+
+.admin-activity-title {
+  margin: 0 0 0.75rem;
+
+  color: var(--color-navy-800);
+
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 700;
+}
+
+.admin-activity-list {
+  border-top: 1px solid transparent;
+}
+
+.admin-activity-item {
+  padding: 0.75rem 0;
+
+  border-bottom: 1px solid var(--color-navy-50);
+
+  color: var(--color-navy-600);
+
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.admin-activity-item:last-child {
+  border-bottom: 0;
+}
+
+/* =========================================
+   Empty Activity State
+   ========================================= */
+
+.admin-no-activity {
+  margin: 0;
+
+  padding: 1.5rem 0;
+
+  color: var(--color-navy-400);
+
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+
+  text-align: center;
+}
+
+/* =========================================
+   Tablet
+   ========================================= */
+
+@media (min-width: 640px) {
+  .admin-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* =========================================
+   Desktop
+   ========================================= */
+
+@media (min-width: 1024px) {
+  .admin-stats-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* =========================================
+   Reduced Motion
+   ========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-stat-card {
+    transition: none;
+  }
+}

@@ -1,0 +1,181 @@
+.driver-trips {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* =========================================
+   TOOLBAR
+========================================= */
+
+.driver-trips-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.driver-trips-tabs {
+  display: flex;
+  gap: 4px;
+  max-width: 100%;
+  padding: 4px;
+  overflow-x: auto;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: var(--shadow-card);
+}
+
+.driver-trips-tab {
+  flex: 0 0 auto;
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-navy-400);
+  font-size: 13px;
+  font-weight: 650;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.driver-trips-tab:hover {
+  color: var(--color-navy-600);
+}
+
+.driver-trips-tab-active,
+.driver-trips-tab-active:hover {
+  background: var(--color-primary);
+  color: var(--color-navy-800);
+}
+
+.driver-trips-new-button {
+  display: none;
+  align-items: center;
+  gap: 6px;
+}
+
+.driver-trips-new-button svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* =========================================
+   TRIP GRID
+========================================= */
+
+.driver-trips-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.driver-trip-summary-card {
+  padding: 20px;
+}
+
+.driver-trip-summary-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.driver-trip-summary-route {
+  margin: 0;
+  color: var(--color-navy-800);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.driver-trip-summary-route svg {
+  display: inline-block;
+  width: 0.875rem;
+  height: 0.875rem;
+  margin: 0 2px;
+  color: var(--color-navy-300);
+  vertical-align: middle;
+}
+
+.driver-trip-summary-time {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 4px 0 0;
+  color: var(--color-navy-400);
+  font-size: 13px;
+}
+
+.driver-trip-summary-time svg {
+  width: 0.875rem;
+  height: 0.875rem;
+  flex: 0 0 auto;
+}
+
+.driver-trip-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.driver-trip-stat {
+  padding: 8px;
+  border-radius: 10px;
+  background: var(--color-bg);
+}
+
+.driver-trip-stat p {
+  margin: 0;
+}
+
+.driver-trip-stat-value {
+  color: var(--color-navy-800);
+  font-weight: 800;
+}
+
+.driver-trip-stat-label {
+  margin-top: 2px !important;
+  color: var(--color-navy-400);
+}
+
+.driver-trip-summary-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.driver-trip-summary-fare {
+  color: var(--color-navy-800);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (min-width: 640px) {
+  .driver-trips-new-button {
+    display: inline-flex;
+  }
+
+  .driver-trips-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .driver-trips {
+    gap: 14px;
+  }
+
+  .driver-trip-summary-card {
+    padding: 16px;
+  }
+}

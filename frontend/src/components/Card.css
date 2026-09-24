@@ -1,0 +1,191 @@
+
+
+.app-card {
+  width: 100%;
+  background: var(--color-surface, #ffffff);
+  border: 1px solid var(--color-navy-50, #f4f7ff);
+  border-left: 3px solid var(--color-primary-strong);
+  box-shadow:
+    0 8px 24px rgba(11, 24, 63, 0.06),
+    0 2px 6px rgba(11, 24, 63, 0.03);
+
+  box-sizing: border-box;
+  position: relative;
+
+  transition:
+    box-shadow 180ms ease,
+    transform 180ms ease,
+    border-color 180ms ease;
+}
+
+
+
+
+.app-card1 {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid rgba(11, 24, 63, 0.08);
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(11, 24, 63, 0.07);
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  transition: all 180ms ease;
+}
+
+.app-card1::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--color-primary-strong, #ffc928);
+}
+
+.app-card1:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(11, 24, 63, 0.11);
+}
+
+
+.app-card-testi{
+  width: 100%;
+  background: var(--color-surface, #ffffff);
+  border: 1px solid var(--color-navy-50, #f4f7ff);
+  border-left: 3px solid var(--color-primary-strong);
+  box-shadow:
+    0 8px 24px rgba(11, 24, 63, 0.06),
+    0 2px 6px rgba(11, 24, 63, 0.03);
+
+  box-sizing: border-box;
+  position: relative;
+
+  transition:
+    box-shadow 180ms ease,
+    transform 180ms ease,
+    border-color 180ms ease;
+}
+
+/* ---------------------------------------------------------
+   Hover
+   --------------------------------------------------------- */
+
+.app-card:hover {
+  box-shadow:
+    0 14px 32px rgba(11, 24, 63, 0.09),
+    0 3px 8px rgba(11, 24, 63, 0.04);
+}
+
+/* ---------------------------------------------------------
+   Interactive cards
+   --------------------------------------------------------- */
+
+.app-card[role="button"],
+.app-card.clickable {
+  cursor: pointer;
+}
+
+.app-card[role="button"]:hover,
+.app-card.clickable:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-navy-100, #e7eeff);
+}
+
+/* ---------------------------------------------------------
+   Focus accessibility
+   --------------------------------------------------------- */
+
+.app-card:focus-visible {
+  outline: 3px solid rgba(255, 201, 40, 0.35);
+  outline-offset: 3px;
+}
+
+/* ---------------------------------------------------------
+   Common card content helpers
+   These are optional classes for future screens.
+   --------------------------------------------------------- */
+
+.app-card-header {
+  padding: 1.25rem 1.25rem 0;
+}
+
+.app-card-body {
+  padding: 1.25rem;
+}
+
+.app-card-footer {
+  padding: 0 1.25rem 1.25rem;
+}
+
+.app-card-divider {
+  border-top: 1px solid var(--color-navy-100, #e7eeff);
+}
+
+/* ---------------------------------------------------------
+   Card variants
+   --------------------------------------------------------- */
+
+.app-card-flat {
+  box-shadow: none;
+}
+
+.app-card-flat:hover {
+  box-shadow: none;
+}
+
+.app-card-bordered {
+  box-shadow: none;
+  border-color: var(--color-navy-100, #e7eeff);
+}
+
+.app-card-highlight {
+  border-color: var(--color-primary, #ffc928);
+}
+
+.app-card-highlight::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 3px;
+  border-radius: 1rem 1rem 0 0;
+  background: var(--color-primary, #ffc928);
+}
+
+/* ---------------------------------------------------------
+   Responsive
+   --------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  .app-card {
+    border-radius: 0.875rem;
+  }
+
+  .app-card-header {
+    padding: 1rem 1rem 0;
+  }
+
+  .app-card-body {
+    padding: 1rem;
+  }
+
+  .app-card-footer {
+    padding: 0 1rem 1rem;
+  }
+}
+
+/* ---------------------------------------------------------
+   Reduced motion
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .app-card {
+    transition: none;
+  }
+
+  .app-card[role="button"]:hover,
+  .app-card.clickable:hover {
+    transform: none;
+  }
+}

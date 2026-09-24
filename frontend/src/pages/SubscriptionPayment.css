@@ -1,0 +1,187 @@
+/* ==========================================================================
+   Subscription Payment Page — plain CSS (converted from Tailwind)
+   Uses the same color reference as Subscribe.css — keep them in sync.
+   navy-800 #0F1B2D | navy-700 #1B2A42 | navy-600 #33475C | navy-500 #45566E
+   navy-400 #64748B | navy-300 #94A3B8 | navy-100 #E4E8EE | navy-50 #F4F6F9
+   yellow-300 #F9D896 | yellow-50 #FFF8E8 | brand teal #08758F
+   ========================================================================== */
+
+.payment-page {
+  min-height: 100vh;
+  padding: 56px 16px;
+  display: flex;
+  justify-content: center;
+  background: radial-gradient(circle at 80% 0%, #16233a 0%, #0f1b2d 45%, #0a1424 100%);
+}
+
+.payment-container {
+  width: 100%;
+  max-width: 480px;
+}
+
+.payment-logo-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+/* Card ------------------------------------------------------------------ */
+
+.payment-card {
+  padding: 32px;
+  border-radius: 24px;
+  background: #ffffff;
+  box-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.35), 0 4px 12px rgba(0, 0, 0, 0.08);
+  animation: payment-fade-in 0.35s ease-out;
+}
+
+@keyframes payment-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 640px) {
+  .payment-card {
+    padding: 40px;
+  }
+}
+
+/* Back link ---------------------------------------------------------------- */
+
+.payment-back-link {
+  margin-bottom: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #64748b;
+  text-decoration: none;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.payment-back-link:hover {
+  color: #1b2a42;
+  transform: translateX(-2px);
+}
+
+.payment-back-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Header ------------------------------------------------------------------ */
+
+.payment-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #0f1b2d;
+}
+
+.payment-header-icon {
+  width: 22px;
+  height: 22px;
+  color: #08758f;
+}
+
+.payment-title {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.payment-subtitle {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #64748b;
+}
+
+/* Plan summary -------------------------------------------------------------- */
+
+.payment-plan-summary {
+  margin-top: 24px;
+  border-radius: 16px;
+  border: 1px solid #f9d896;
+  background: #fff8e8;
+  padding: 16px;
+}
+
+.payment-plan-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.payment-plan-name {
+  font-weight: 600;
+  color: #1b2a42;
+}
+
+.payment-plan-price {
+  font-size: 20px;
+  font-weight: 800;
+  color: #0f1b2d;
+}
+
+.payment-plan-meta {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: #45566e;
+}
+
+/* Form / note ---------------------------------------------------------------- */
+
+.payment-form {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.payment-note {
+  border-radius: 16px;
+  background: #f4f6f9;
+  padding: 16px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #33475c;
+}
+
+.payment-cta {
+  width: 100%;
+  font-size: 16px;
+  padding: 14px 0;
+  border-radius: 14px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.payment-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px -10px rgba(8, 117, 143, 0.45);
+}
+
+/* Footer -------------------------------------------------------------- */
+
+.payment-secure-note {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.payment-secure-icon {
+  width: 14px;
+  height: 14px;
+}

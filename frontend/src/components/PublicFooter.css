@@ -1,0 +1,367 @@
+.public-footer {
+  --footer-blue: rgb(14, 78, 168);
+  --footer-blue-deep: rgb(8, 44, 98);
+  --footer-ink-100: rgba(255, 255, 255, 0.94);
+  --footer-ink-300: rgba(222, 233, 252, 0.72);
+  --footer-ink-500: rgba(222, 233, 252, 0.5);
+
+  width: 100%;
+  background: linear-gradient(175deg, var(--footer-blue) 0%, var(--footer-blue-deep) 100%);
+  color: var(--footer-ink-300);
+}
+
+/* =================================
+   CONTAINER
+================================= */
+
+.public-footer-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 56px 32px 28px;
+}
+
+/* =================================
+   MAIN GRID
+================================= */
+
+.public-footer-grid {
+  display: grid;
+  grid-template-columns: 1.7fr 0.8fr 0.9fr 1fr 1.15fr;
+  gap: 40px;
+}
+
+/* =================================
+   BRAND
+================================= */
+
+.public-footer-brand {
+  min-width: 0;
+}
+
+.public-footer-description {
+  max-width: 320px;
+  margin: 16px 0 0;
+
+  color: var(--footer-ink-300);
+
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* =================================
+   SOCIAL
+================================= */
+
+.public-footer-socials {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.public-footer-social {
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--footer-ink-100);
+
+  text-decoration: none;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.public-footer-social:hover {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: var(--footer-blue-deep);
+}
+
+/* =================================
+   COLUMNS
+================================= */
+
+.public-footer-column,
+.public-footer-download {
+  min-width: 0;
+}
+
+.public-footer-title {
+  margin: 0 0 16px;
+
+  color: var(--footer-ink-100);
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.public-footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+
+  color: var(--footer-ink-300);
+
+  font-size: 13px;
+}
+
+.public-footer-links li {
+  transition: color 0.2s ease;
+  cursor: default;
+}
+
+.public-footer-links li:hover {
+  color: var(--footer-ink-100);
+}
+
+/* =================================
+   CONTACT
+================================= */
+
+.public-footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+
+  margin: 22px 0 0;
+  padding: 18px 0 0;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+
+  list-style: none;
+
+  color: var(--footer-ink-300);
+
+  font-size: 12px;
+}
+
+.public-footer-contact li {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.public-footer-contact svg {
+  flex-shrink: 0;
+  color: var(--color-primary);
+}
+
+/* =================================
+   DOWNLOAD / STORE BUTTONS
+================================= */
+
+.public-footer-stores {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.public-store-button {
+  display: inline-flex;
+  width: fit-content;
+  border-radius: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.public-store-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(4, 20, 46, 0.35);
+}
+
+.public-store-image {
+  display: block;
+  width: 150px;
+  height: auto;
+  border-radius: 10px;
+  object-fit: contain;
+}
+
+/* =================================
+   BOTTOM
+================================= */
+
+.public-footer-bottom {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  margin-top: 48px;
+  padding-top: 24px;
+
+  color: var(--footer-ink-500);
+
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.public-footer-bottom::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--color-primary) 0,
+    var(--color-primary) 14px,
+    transparent 14px,
+    transparent 28px
+  );
+  opacity: 0.5;
+}
+
+.public-footer-bottom p {
+  margin: 0;
+}
+
+.public-footer-location {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.public-footer-location svg {
+  flex-shrink: 0;
+  color: var(--color-primary);
+}
+
+/* =================================
+   TABLET
+================================= */
+
+@media (max-width: 1024px) {
+  .public-footer-grid {
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  }
+
+  .public-footer-download {
+    grid-column: 1 / -1;
+  }
+
+  .public-footer-stores {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 900px) {
+  .public-footer-container {
+    padding: 46px 24px 24px;
+  }
+
+  .public-footer-grid {
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 36px;
+  }
+
+  .public-footer-brand {
+    grid-column: 1 / -1;
+  }
+
+  .public-footer-description {
+    max-width: 500px;
+  }
+}
+
+/* =================================
+   MOBILE
+================================= */
+
+@media (max-width: 640px) {
+  .public-footer-container {
+    padding: 42px 20px 22px;
+  }
+
+  .public-footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px 24px;
+  }
+
+  .public-footer-brand,
+  .public-footer-download {
+    grid-column: 1 / -1;
+  }
+
+  .public-footer-description {
+    max-width: 100%;
+  }
+
+  .public-footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+
+    margin-top: 36px;
+  }
+}
+
+/* =================================
+   SMALL MOBILE
+================================= */
+
+@media (max-width: 400px) {
+  .public-footer-container {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .public-footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 18px;
+  }
+
+  .public-footer-title {
+    font-size: 13px;
+  }
+
+  .public-footer-links {
+    font-size: 12px;
+  }
+
+  .public-footer-social {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+/* =================================
+   ACCESSIBILITY
+================================= */
+
+.public-footer a:focus-visible {
+  outline: 3px solid rgba(255, 193, 7, 0.65);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .public-footer-social,
+  .public-footer-links li,
+  .public-store-button {
+    transition: none;
+  }
+}
+
+.public-footer-social-icon {
+  width: 16px;
+  height: 16px;
+}

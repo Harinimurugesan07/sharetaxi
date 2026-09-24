@@ -1,0 +1,299 @@
+.driver-profile {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+.driver-profile-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+  align-items: start;
+  gap: 20px;
+}
+
+@media (max-width: 860px) {
+  .driver-profile-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.driver-profile-side,
+.driver-profile-main {
+  padding: 0;
+  overflow: hidden;
+}
+
+.driver-profile-main {
+  padding: 24px;
+}
+
+@media (min-width: 861px) {
+  .driver-profile-side {
+    position: sticky;
+    top: 1rem;
+  }
+}
+
+/* =========================================
+   SIDE PANEL — banner + header
+========================================= */
+
+.driver-profile-banner {
+  height: 64px;
+     background: linear-gradient(135deg, #8693b1 0%, #fff 45%, #e9bc70 100%);
+}
+
+.driver-profile-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 20px;
+  margin-top: -32px;
+}
+
+.driver-profile-avatar {
+  width: 64px;
+  height: 64px;
+  flex: 0 0 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--color-navy-700);
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 800;
+  border: 3px solid #ffffff;
+  box-shadow: 0 8px 16px -8px rgba(15, 27, 45, 0.4);
+}
+
+.driver-profile-badge {
+  margin-bottom: 6px;
+}
+
+.driver-profile-badge svg {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.driver-profile-identity {
+  padding: 12px 20px 0;
+  text-align: left;
+}
+
+.driver-profile-identity p {
+  margin: 0 0 4px;
+  color: var(--color-navy-800);
+  font-size: 17px;
+  font-weight: 800;
+}
+
+/* =========================================
+   CONTACT
+========================================= */
+
+.driver-profile-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 18px 20px 0;
+  padding: 16px;
+  border-radius: 12px;
+  background: var(--color-bg);
+  font-size: 14px;
+}
+
+.driver-profile-contact-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-navy-600);
+  overflow-wrap: anywhere;
+}
+
+.driver-profile-contact-row svg {
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 auto;
+  color: var(--color-navy-400);
+}
+
+/* =========================================
+   STATS
+========================================= */
+
+.driver-profile-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 16px 20px 20px;
+}
+
+.driver-profile-stat {
+  position: relative;
+  padding: 16px 12px 12px;
+  border-radius: 12px;
+  background: var(--color-bg);
+  text-align: center;
+  border: 1px solid var(--color-navy-100);
+}
+
+.driver-profile-stat-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  margin-bottom: 6px;
+  border-radius: 999px;
+  background: rgba(245, 166, 35, 0.15);
+  color: #f5a623;
+}
+
+.driver-profile-stat-icon svg {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
+.driver-profile-stat p {
+  margin: 0;
+}
+
+.driver-profile-stat-value {
+  color: var(--color-navy-800);
+  font-size: 20px;
+  font-weight: 850;
+}
+
+.driver-profile-stat-label {
+  margin-top: 2px !important;
+  color: var(--color-navy-400);
+  font-size: 12px;
+}
+
+/* =========================================
+   ADDRESS / DETAILS PANEL (right column)
+========================================= */
+
+.driver-profile-address-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.driver-profile-address-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: var(--color-navy-800);
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.driver-profile-address-title svg {
+  width: 1.05rem;
+  height: 1.05rem;
+  color: #f5a623;
+}
+
+.driver-profile-edit-icon {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+/* Read-only view -------------------------------------------------------- */
+
+.driver-profile-address-view {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.driver-profile-address-tile {
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-navy-100);
+}
+
+.driver-profile-address-tile-label {
+  margin: 0 0 4px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-navy-400);
+}
+
+.driver-profile-address-text {
+  margin: 0;
+  color: var(--color-navy-700);
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+.driver-profile-license-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+@media (max-width: 480px) {
+  .driver-profile-license-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Edit form -------------------------------------------------------------- */
+
+.driver-profile-address-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.driver-profile-address-actions {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  grid-column: 1 / -1;
+  padding-top: 4px;
+  border-top: 1px dashed var(--color-navy-100);
+  margin-top: 4px;
+}
+
+.driver-profile-address-actions svg {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 560px) {
+  .driver-profile-main {
+    padding: 18px;
+  }
+
+  .driver-profile-header {
+    gap: 12px;
+  }
+
+  .driver-profile-avatar {
+    width: 52px;
+    height: 52px;
+    flex: 0 0 52px;
+    font-size: 17px;
+  }
+
+  .driver-profile-address-form {
+    grid-template-columns: 1fr;
+  }
+}

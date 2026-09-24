@@ -1,0 +1,98 @@
+.operator-vehicles-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.operator-vehicles-form-card {
+  padding: 1.25rem;
+}
+
+.operator-vehicles-title {
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 800;
+  color: var(--color-navy-800);
+}
+
+.operator-vehicles-subtitle {
+  margin: 0.25rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--color-navy-400);
+}
+
+.operator-vehicles-form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.operator-vehicles-form-submit-wrap {
+  grid-column: 1 / -1;
+}
+
+.operator-vehicles-list-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.operator-vehicle-card {
+  padding: 1.25rem;
+}
+
+.operator-vehicle-name {
+  margin: 0;
+  font-weight: 700;
+  color: var(--color-navy-800);
+}
+
+.operator-vehicle-reg {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--color-navy-400);
+}
+
+.operator-vehicle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.operator-vehicle-driver {
+  color: var(--color-navy-500);
+}
+
+.operator-vehicle-seats {
+  margin: 0.25rem 0 0;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: var(--color-navy-400);
+}
+
+@media (min-width: 640px) {
+  .operator-vehicles-form-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .operator-vehicles-list-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .operator-vehicles-form-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .operator-vehicles-list-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

@@ -1,0 +1,266 @@
+.se-wrap {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 720px) {
+  .se-wrap {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+/* Control panel ------------------------------------------------------------ */
+
+.cp-panel {
+    --cp-ink: #ffffff;
+    --cp-panel-soft: #e3c261;
+    --cp-line: #262c38;
+    --cp-paper: #03070f;
+    --cp-mist: #071329;
+    --cp-mist-dim: #565d6b;
+    --cp-amber: #ffb627;
+    --cp-red: #db6c6c;
+    --cp-green: #000000;
+    --cp-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    position: relative;
+    background: var(--cp-ink);
+    border-radius: 1rem;
+    border: 1px solid var(--cp-line);
+    color: var(--cp-paper);
+    overflow: hidden;
+}
+
+.cp-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.02) 0px,
+    rgba(255, 255, 255, 0.02) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+/* Danger zone card spans the full grid width on wider screens -------------- */
+
+@media (min-width: 720px) {
+  .cp-panel--danger-zone {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Section ------------------------------------------------------------------ */
+
+.cp-section {
+  position: relative;
+  padding: 1.25rem 1.4rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.cp-section-head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.9rem;
+}
+
+.cp-section-icon {
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 0.5rem;
+      background: #eaf1ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cp-section-icon svg {
+  width: 0.95rem;
+  height: 0.95rem;
+  color: var(--cp-mist);
+}
+
+.cp-section-icon--danger {
+  background: #fff;
+}
+
+.cp-section-icon--danger svg {
+  color: var(--cp-red);
+}
+
+.cp-section-title {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--cp-paper);
+}
+
+.cp-section-title--danger {
+  color: var(--cp-red);
+}
+
+/* Alert strip ---------------------------------------------------------- */
+
+.cp-alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-radius: 0.6rem;
+  padding: 0.8rem 0.9rem;
+  margin-bottom: 1rem;
+  border-left: 3px solid transparent;
+}
+
+.cp-alert p {
+  margin: 0;
+  font-size: 0.79rem;
+  line-height: 1.5;
+  color: var(--cp-paper);
+}
+
+.cp-alert--amber {
+  background: rgba(255, 182, 39, 0.08);
+  border-left-color: var(--cp-amber);
+}
+
+.cp-alert--danger {
+  background: rgba(255, 93, 93, 0.08);
+  border-left-color: var(--cp-red);
+}
+
+/* Row ------------------------------------------------------------------- */
+
+.cp-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 2.6rem;
+  margin-top: auto;
+}
+
+.cp-row-label {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--cp-paper);
+}
+
+.cp-row-desc {
+  margin: 0.15rem 0 0;
+  font-size: 0.76rem;
+  color: var(--cp-mist);
+  line-height: 1.5;
+}
+
+.cp-row-desc--standalone {
+  margin-bottom: 0.9rem;
+}
+
+/* Toggle — LED rocker switch ------------------------------------------------ */
+
+.cp-toggle {
+  width: 2.9rem;
+  height: 1.55rem;
+  border-radius: 999px;
+  border: 1px solid var(--cp-line);
+      background: #f3fbfc;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  position: relative;
+  transition: border-color 0.15s ease;
+}
+
+.cp-toggle:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.cp-toggle-knob {
+  position: absolute;
+  top: 0.16rem;
+  left: 0.16rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 999px;
+  background: var(--cp-mist-dim);
+  transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.cp-toggle-on {
+  border-color: rgba(62, 207, 122, 0.4);
+}
+
+.cp-toggle-on .cp-toggle-knob {
+  transform: translateX(1.35rem);
+  background: var(--cp-green);
+  box-shadow: 0 0 8px rgba(62, 207, 122, 0.7);
+}
+
+.cp-toggle:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 182, 39, 0.25);
+}
+
+/* Buttons ---------------------------------------------------------------- */
+
+.cp-btn {
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 0.82rem;
+  padding: 0.55rem 1rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.cp-btn-outline {
+  background: #eaf1ff;
+  
+  color: var(--cp-paper);
+  align-self: flex-start;
+}
+
+.cp-btn-outline:hover:not(:disabled) {
+  border-color: var(--cp-mist-dim);
+}
+
+.cp-btn-outline:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.cp-btn-danger {
+  margin-top: 0.85rem;
+      background: #ffc107;
+  color: #2a0d0d;
+  align-self: flex-start;
+}
+
+.cp-btn-danger:hover {
+  background: #ff7676;
+}
+
+.cp-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 182, 39, 0.25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cp-toggle,
+  .cp-toggle-knob,
+  .cp-btn {
+    transition: none;
+  }
+}

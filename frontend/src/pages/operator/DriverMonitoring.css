@@ -1,0 +1,156 @@
+.driver-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+  border-radius: 9999px;
+  background-color: var(--color-navy-100);
+  color: var(--color-navy-700);
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 700;
+}
+
+.driver-name-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+/* Detail panel */
+
+.driver-detail-card {
+  padding: 1.25rem;
+}
+
+.driver-detail-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.driver-detail-name {
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+  color: var(--color-navy-800);
+}
+
+.driver-detail-meta {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--color-navy-400);
+}
+
+.driver-detail-close {
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--color-navy-400);
+  cursor: pointer;
+}
+
+.driver-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.driver-detail-section-title {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 700;
+  color: var(--color-navy-800);
+}
+
+.driver-detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.driver-detail-trip-item {
+  border-radius: 0.5rem;
+  background-color: var(--color-bg);
+  padding: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.driver-detail-trip-route {
+  margin: 0;
+  font-weight: 600;
+  color: var(--color-navy-800);
+}
+
+.driver-detail-trip-meta {
+  margin: 0.25rem 0 0;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: var(--color-navy-500);
+}
+
+.driver-detail-empty {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--color-navy-400);
+}
+
+.driver-detail-doc-item {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 0.5rem;
+  background-color: var(--color-bg);
+  padding: 0.75rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.driver-detail-info-line {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--color-navy-500);
+}
+
+.driver-detail-info-line + .driver-detail-info-line {
+  margin-top: 0;
+}
+
+.driver-delete-button {
+  border: 1px solid rgba(185, 28, 28, 0.35);
+  background: rgba(239, 68, 68, 0.08);
+  color: #991b1b;
+  border-radius: 0.5rem;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.driver-delete-button:hover:not(:disabled) {
+  background: rgba(239, 68, 68, 0.14);
+}
+
+.driver-delete-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (min-width: 1024px) {
+  .driver-detail-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

@@ -1,0 +1,261 @@
+.driver-vehicles {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* =========================================
+   TOOLBAR
+========================================= */
+
+.driver-vehicles-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.driver-vehicles-toolbar p {
+  margin: 0;
+  color: var(--color-navy-400);
+  font-size: 13px;
+}
+
+/* =========================================
+   VEHICLE GRID
+========================================= */
+
+.driver-vehicles-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.driver-vehicle-card {
+  padding: 20px;
+}
+
+.driver-vehicle-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.driver-vehicle-card-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.driver-vehicle-card-icon {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: var(--color-navy-100);
+  color: var(--color-navy-700);
+}
+
+.driver-vehicle-card-icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.driver-vehicle-card-info p {
+  margin: 0;
+  color: var(--color-navy-800);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.driver-vehicle-card-info span {
+  color: var(--color-navy-400);
+  font-size: 12px;
+}
+
+.driver-vehicle-badge-icon {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+/* Info tiles */
+
+.driver-vehicle-details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 16px;
+  font-size: 13px;
+}
+
+.driver-vehicle-info-tile {
+  padding: 10px;
+  border-radius: 10px;
+  background: var(--color-bg);
+}
+
+.driver-vehicle-info-tile p {
+  margin: 0;
+}
+
+.driver-vehicle-info-label {
+  color: var(--color-navy-400);
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+.driver-vehicle-info-value {
+  margin-top: 1px !important;
+  color: var(--color-navy-800);
+  font-weight: 650;
+  text-transform: capitalize;
+}
+
+/* Document chips */
+
+.driver-vehicle-docs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.driver-doc-chip {
+  padding: 6px 10px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.driver-doc-chip p {
+  margin: 0;
+}
+
+.driver-doc-chip-status {
+  margin-top: 2px !important;
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+.driver-doc-chip-verified {
+  background: var(--color-success-50);
+  color: var(--color-success-600);
+}
+
+.driver-doc-chip-pending {
+  background: var(--color-primary-soft);
+  color: var(--color-navy-700);
+}
+
+.driver-doc-chip-missing {
+  background: var(--color-navy-50);
+  color: var(--color-navy-400);
+}
+
+/* =========================================
+   ADD VEHICLE MODAL
+========================================= */
+
+.driver-vehicle-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(11, 24, 63, 0.5);
+}
+
+.driver-vehicle-modal-card {
+  width: 100%;
+  max-width: 460px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 24px;
+}
+
+.driver-vehicle-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.driver-vehicle-modal-header p {
+  margin: 0;
+  color: var(--color-navy-800);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.driver-vehicle-modal-close {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-navy-300);
+  cursor: pointer;
+}
+
+.driver-vehicle-modal-close:hover {
+  color: var(--color-navy-600);
+}
+
+.driver-vehicle-modal-close svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.driver-vehicle-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.driver-vehicle-form-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.driver-vehicle-submit {
+  width: 100%;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (min-width: 640px) {
+  .driver-vehicles-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .driver-vehicle-docs {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .driver-vehicles {
+    gap: 14px;
+  }
+
+  .driver-vehicle-card {
+    padding: 16px;
+  }
+
+  .driver-vehicle-modal-card {
+    padding: 20px;
+  }
+
+  .driver-vehicle-form-row {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,213 @@
+.reports-card {
+  padding: 1.5rem;
+}
+
+.reports-title {
+  margin: 0;
+  color: var(--color-navy-800);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 700;
+}
+
+.reports-subtitle {
+  margin: 0.25rem 0 0;
+  color: var(--color-navy-400);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+/* Stat grid -------------------------------------------------------------- */
+
+.reports-grid {
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+}
+
+.reports-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-radius: 0.9rem;
+  background: var(--color-navy-50, #f4f6f9);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.reports-tile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px -16px rgba(15, 23, 42, 0.35);
+}
+
+.reports-tile-icon {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.6rem;
+}
+
+.reports-tile-value {
+  font-size: 1.5rem;
+  line-height: 1.9rem;
+  font-weight: 800;
+  color: var(--color-navy-800);
+}
+
+.reports-tile-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-navy-400);
+}
+
+/* Tone variants — icon badge color per metric ---------------------------- */
+
+.reports-tile-blue .reports-tile-icon {
+  background: rgba(37, 99, 235, 0.12);
+  color: var(--color-primary-ink, #2563eb);
+}
+
+.reports-tile-purple .reports-tile-icon {
+  background: rgba(147, 51, 234, 0.12);
+  color: #9333ea;
+}
+
+.reports-tile-green .reports-tile-icon {
+  background: rgba(34, 197, 94, 0.12);
+  color: var(--color-success-600, #16a34a);
+}
+
+.reports-tile-amber .reports-tile-icon {
+  background: rgba(245, 158, 11, 0.14);
+  color: #b7791f;
+}
+
+.reports-tile-cyan .reports-tile-icon {
+  background: rgba(6, 182, 212, 0.14);
+  color: #0891b2;
+}
+
+/* Revenue — the headline number gets its own highlighted strip ----------- */
+
+.reports-revenue {
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1.1rem 1.25rem;
+  border-radius: 0.9rem;
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(74, 222, 128, 0.05));
+  border: 1px solid rgba(34, 197, 94, 0.18);
+}
+
+.reports-revenue-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  flex: 0 0 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.7rem;
+  background: rgba(34, 197, 94, 0.16);
+  color: var(--color-success-600, #16a34a);
+}
+
+.reports-revenue-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-navy-400);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.reports-revenue-value {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--color-navy-800);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reports-tile {
+    transition: none;
+  }
+}
+
+
+.payment-split-section {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.payment-split-group {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+}
+
+.payment-split-group h3 {
+  margin: 0 0 16px;
+  font-size: 16px;
+}
+
+.payment-split-row {
+  display: flex;
+  gap: 20px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.payment-split-row label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.payment-split-row input {
+  width: 120px;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.payment-split-result {
+  min-width: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.payment-split-result strong {
+  font-size: 16px;
+}
+
+.payment-split-save {
+  margin-top: 20px;
+  padding: 10px 18px;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.payment-split-save:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.payment-split-message {
+  margin-top: 12px;
+  font-size: 14px;
+}

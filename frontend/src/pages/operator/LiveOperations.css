@@ -1,0 +1,166 @@
+.live-ops {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.live-ops-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.live-ops-map-card {
+  padding: 1.25rem;
+}
+
+.live-ops-list-card {
+  padding: 1rem;
+}
+
+.live-ops-card-title {
+  margin: 0 0 0.75rem;
+  color: var(--color-navy-800);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 700;
+}
+
+/* Live trip coordinates grid */
+
+.live-ops-coords-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+.live-ops-coord-item {
+  border-radius: 0.75rem;
+  background-color: var(--color-bg);
+  padding: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.live-ops-coord-driver {
+  margin: 0;
+  font-weight: 600;
+  color: var(--color-navy-800);
+}
+
+.live-ops-coord-line {
+  margin: 0.25rem 0 0;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: var(--color-navy-500);
+}
+
+.live-ops-coord-line + .live-ops-coord-line {
+  margin-top: 0;
+}
+
+.live-ops-empty {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--color-navy-400);
+}
+
+/* Active trips list */
+
+.live-ops-trip-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.live-ops-trip-btn {
+  width: 100%;
+  border: 1px solid var(--color-navy-100);
+  border-radius: 0.75rem;
+  padding: 0.875rem;
+  text-align: left;
+  background: none;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.live-ops-trip-btn:hover {
+  border-color: var(--color-navy-300);
+}
+
+.live-ops-trip-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.live-ops-trip-id {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 600;
+  color: var(--color-navy-400);
+}
+
+.live-ops-trip-route {
+  margin: 0.25rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  color: var(--color-navy-800);
+}
+
+.live-ops-trip-driver {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: var(--color-navy-400);
+}
+
+.live-ops-trip-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: var(--color-navy-500);
+}
+
+/* =========================================
+   Tablet
+   ========================================= */
+
+@media (min-width: 640px) {
+  .live-ops-coords-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* =========================================
+   Desktop
+   ========================================= */
+
+@media (min-width: 1024px) {
+  .live-ops-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .live-ops-map-card {
+    grid-column: span 3 / span 3;
+  }
+
+  .live-ops-list-card {
+    grid-column: span 2 / span 2;
+  }
+}
+
+/* =========================================
+   Reduced Motion
+   ========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .live-ops-trip-btn {
+    transition: none;
+  }
+}

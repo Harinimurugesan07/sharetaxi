@@ -1,0 +1,604 @@
+/* =========================================
+   Active Trip
+   ========================================= */
+
+.active-trip {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+  gap: 1.25rem;
+}
+
+.active-trip-main,
+.active-trip-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* =========================================
+   Route Card
+   ========================================= */
+
+.active-trip-route-card {
+  padding: 1.25rem;
+}
+
+.active-trip-route-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.active-trip-route-info {
+  min-width: 0;
+}
+
+.active-trip-route-title {
+  margin: 0;
+
+  color: var(--color-navy-800);
+
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 700;
+}
+
+.active-trip-route-meta {
+  margin: 0.25rem 0 0;
+
+  color: var(--color-navy-400);
+
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+/* =========================================
+   Route Map
+   ========================================= */
+
+.active-trip-map {
+  position: relative;
+
+  width: 100%;
+  height: 320px;
+
+  margin-top: 1.25rem;
+
+  overflow: hidden;
+
+  border-radius: 0.75rem;
+
+  background: var(--color-navy-50);
+}
+
+.active-trip-map-svg {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+}
+
+/* =========================================
+   Map Location Cards
+   ========================================= */
+
+.active-trip-location-card {
+  position: absolute;
+
+  top: 0.75rem;
+
+  max-width: 42%;
+
+  padding: 0.5rem 0.75rem;
+
+  border-radius: 0.75rem;
+
+  background: #ffffff;
+
+  box-shadow: var(--shadow-card);
+}
+
+.active-trip-pickup {
+  left: 0.75rem;
+}
+
+.active-trip-destination {
+  right: 0.75rem;
+
+  text-align: right;
+}
+
+.active-trip-location-label {
+  margin: 0;
+
+  color: var(--color-navy-400);
+
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.active-trip-location-name {
+  margin: 0.125rem 0 0;
+
+  overflow: hidden;
+
+  color: var(--color-navy-800);
+
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* =========================================
+   Passenger Summary
+   ========================================= */
+
+.active-trip-passenger-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  margin-top: 1rem;
+
+  padding: 0.875rem;
+
+  border-radius: 0.75rem;
+
+  background: var(--color-bg);
+
+  font-size: 0.875rem;
+}
+
+.active-trip-passenger-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  color: var(--color-navy-700);
+
+  font-weight: 500;
+}
+
+.active-trip-passenger-label svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.active-trip-passenger-count {
+  color: var(--color-navy-800);
+  font-weight: 700;
+
+  text-align: right;
+}
+
+/* =========================================
+   Cancel Trip Button
+   ========================================= */
+
+.active-trip-cancel-button {
+  align-self: flex-start;
+
+  color: var(--color-danger-500) !important;
+  border-color: var(--color-danger-200) !important;
+}
+
+.active-trip-cancel-button svg {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+/* =========================================
+   Cards
+   ========================================= */
+
+.active-trip-progress-card,
+.active-trip-status-card {
+  padding: 1.25rem;
+}
+
+.active-trip-card-title {
+  margin: 0 0 1rem;
+
+  color: var(--color-navy-800);
+
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 700;
+}
+
+/* =========================================
+   Progress
+   ========================================= */
+
+.active-trip-progress-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.active-trip-progress-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.active-trip-progress-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 1.5rem;
+  height: 1.5rem;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  font-size: 0.6875rem;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.active-trip-progress-completed {
+  background: var(--color-success-500);
+  color: #ffffff;
+}
+
+.active-trip-progress-inactive {
+  background: var(--color-navy-100);
+  color: var(--color-navy-400);
+}
+
+.active-trip-progress-label {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.active-trip-progress-label-active {
+  color: var(--color-navy-800);
+  font-weight: 600;
+}
+
+.active-trip-progress-label-inactive {
+  color: var(--color-navy-400);
+}
+
+.active-trip-updated {
+  margin: 0.75rem 0 0;
+
+  color: var(--color-navy-300);
+
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+/* =========================================
+   Status
+   ========================================= */
+
+.active-trip-status-message {
+  margin: 0;
+
+  color: var(--color-navy-400);
+
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.active-trip-completed {
+  margin: 0;
+
+  color: var(--color-success-600);
+
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+}
+
+.active-trip-update-button {
+  width: 100%;
+}
+
+.active-trip-status-help {
+  margin: 0.75rem 0 0;
+
+  padding: 0.75rem;
+
+  border-radius: 0.5rem;
+
+  background: var(--color-primary-soft);
+
+  color: var(--color-navy-600);
+
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+/* =========================================
+   Cancel Modal
+   ========================================= */
+
+.active-trip-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 1rem;
+
+  background: rgba(11, 24, 63, 0.5);
+}
+
+.active-trip-modal-card {
+  width: 100%;
+  max-width: 24rem;
+
+  padding: 1.5rem;
+}
+
+.active-trip-modal-title {
+  margin: 0;
+
+  color: var(--color-navy-800);
+
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 700;
+}
+
+.active-trip-modal-description {
+  margin: 0.25rem 0 0;
+
+  color: var(--color-navy-400);
+
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.active-trip-reasons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  margin-top: 1rem;
+}
+
+.active-trip-reason {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  padding: 0.5rem 0.75rem;
+
+  border: 1px solid var(--color-navy-100);
+  border-radius: 0.5rem;
+
+  color: var(--color-navy-700);
+
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.active-trip-reason:hover {
+  background: var(--color-navy-50);
+  border-color: var(--color-navy-200);
+}
+
+.active-trip-reason input {
+  margin: 0;
+
+  accent-color: var(--color-navy-700);
+}
+
+.active-trip-modal-actions {
+  display: flex;
+  gap: 0.5rem;
+
+  margin-top: 1.25rem;
+}
+
+.active-trip-modal-button {
+  flex: 1;
+}
+
+/* =========================================
+   Tablet
+   ========================================= */
+
+@media (max-width: 1023px) {
+  .active-trip {
+    grid-template-columns: 1fr;
+  }
+
+  .active-trip-sidebar {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* =========================================
+   Mobile
+   ========================================= */
+
+@media (max-width: 640px) {
+  .active-trip {
+    gap: 1rem;
+  }
+
+  .active-trip-main,
+  .active-trip-sidebar {
+    gap: 1rem;
+  }
+
+  .active-trip-sidebar {
+    display: flex;
+  }
+
+  .active-trip-route-card,
+  .active-trip-progress-card,
+  .active-trip-status-card {
+    padding: 1rem;
+  }
+
+  .active-trip-route-title {
+    font-size: 0.9375rem;
+  }
+
+  .active-trip-route-meta {
+    font-size: 0.75rem;
+  }
+
+  .active-trip-map {
+    height: 280px;
+  }
+
+  .active-trip-location-card {
+    max-width: 45%;
+  }
+
+  .active-trip-location-name {
+    font-size: 0.75rem;
+  }
+
+  .active-trip-passenger-summary {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .active-trip-passenger-count {
+    text-align: left;
+  }
+
+  .active-trip-cancel-button {
+    width: 100%;
+  }
+
+  .active-trip-modal-actions {
+    flex-direction: column;
+  }
+}
+
+/* =========================================
+   Reduced Motion
+   ========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .active-trip-reason {
+    transition: none;
+  }
+}
+
+/* =========================================
+   Passenger manifest
+   ========================================= */
+
+.active-trip-manifest-card {
+  padding: 1.25rem;
+}
+
+.active-trip-manifest-empty {
+  margin: 0.75rem 0 0;
+
+  color: var(--color-navy-400);
+
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.active-trip-manifest {
+  display: flex;
+  flex-direction: column;
+
+  margin: 0.75rem 0 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.active-trip-manifest-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+
+  padding: 0.625rem 0;
+
+  border-top: 1px solid var(--color-navy-100, #e5e9f2);
+}
+
+.active-trip-manifest-row:first-child {
+  border-top: 0;
+}
+
+.active-trip-manifest-name {
+  margin: 0;
+
+  color: var(--color-navy-800);
+
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.active-trip-manifest-meta {
+  margin: 0.125rem 0 0;
+
+  color: var(--color-navy-400);
+
+  font-size: 0.8125rem;
+}
+
+/* =========================================
+   Live location status
+   ========================================= */
+
+.active-trip-location {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+
+  margin: 0.75rem 0 0;
+
+  font-size: 0.8125rem;
+  line-height: 1.125rem;
+}
+
+.active-trip-location svg {
+  flex: none;
+
+  width: 1rem;
+  height: 1rem;
+}
+
+.active-trip-location-sharing {
+  color: #1ca652;
+}
+
+.active-trip-location-waiting {
+  color: var(--color-navy-400);
+}
+
+.active-trip-location-denied,
+.active-trip-location-unavailable {
+  color: #e13b3b;
+}

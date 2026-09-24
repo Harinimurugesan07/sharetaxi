@@ -1,0 +1,423 @@
+/* =========================================================
+   SHARETAXI ADMIN LOGIN — text-only intro side, blue theme, fixed viewport
+========================================================= */
+
+:root {
+  --admin-login-yellow: #ffc928;
+  --admin-login-yellow-soft: #fff3cf;
+
+  --admin-login-blue: #173b8f;
+  --admin-login-blue-dark: #0b183f;
+  --admin-login-blue-soft: #eaf0fd;
+
+  --admin-login-bg: #f4f8fc;
+
+  --admin-login-text: #0b183f;
+  --admin-login-muted: #667085;
+
+  --admin-login-danger: #dc3545;
+  --admin-login-danger-bg: #fff1f2;
+
+  --admin-login-white: #ffffff;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+.admin-login-page {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--admin-login-bg);
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-login-page-header {
+  position: relative;
+  z-index: 3;
+  flex-shrink: 0;
+  padding: clamp(14px, 2vh, 28px) 48px 0;
+}
+
+/* =========================================================
+   BACKGROUND BLOBS
+========================================================= */
+
+.admin-login-blob {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.admin-login-blob-bottom {
+  left: -10%;
+  bottom: -22%;
+  width: 60%;
+  height: 80%;
+  background: var(--admin-login-blue);
+  border-radius: 58% 42% 44% 56% / 52% 46% 54% 48%;
+  opacity: 0.06;
+}
+
+.admin-login-blob-top {
+  top: -8%;
+  right: 4%;
+  width: 20%;
+  height: 26%;
+  background: var(--admin-login-yellow-soft);
+  border-radius: 40% 60% 55% 45% / 45% 55% 45% 55%;
+  opacity: 0.8;
+}
+
+/* =========================================================
+   CONTENT LAYOUT
+========================================================= */
+
+.admin-login-content {
+  position: relative;
+  z-index: 2;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(30px, 6vw, 90px);
+  padding: clamp(10px, 2vh, 30px) 48px;
+}
+
+/* =========================================================
+   LEFT — TEXT INTRO + PERKS
+========================================================= */
+
+.admin-login-intro {
+  flex: 1 1 420px;
+  max-width: 480px;
+}
+
+.admin-login-intro-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid rgba(23, 59, 143, 0.18);
+  border-radius: 999px;
+  background: var(--admin-login-blue-soft);
+  color: var(--admin-login-blue);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.9px;
+}
+
+.admin-login-intro-badge span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--admin-login-blue);
+  box-shadow: 0 0 0 4px rgba(23, 59, 143, 0.14);
+}
+
+.admin-login-intro-title {
+  margin: clamp(14px, 2.4vh, 22px) 0 0;
+  color: var(--admin-login-blue-dark);
+  font-size: clamp(28px, 3.4vw, 44px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.8px;
+}
+
+.admin-login-intro-title span {
+  color: var(--admin-login-blue);
+}
+
+.admin-login-intro-text {
+  margin: clamp(10px, 1.8vh, 16px) 0 0;
+  max-width: 380px;
+  color: var(--admin-login-muted);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+/* =========================================================
+   PERKS
+========================================================= */
+
+.admin-login-perks {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 1.4vh, 15px);
+  padding: 0;
+  margin: clamp(18px, 2.8vh, 28px) 0 0;
+  list-style: none;
+}
+
+.admin-login-perks li {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  color: var(--admin-login-text);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.admin-login-perk-icon {
+  display: flex;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--admin-login-blue-soft);
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(11, 24, 63, 0.06);
+}
+
+.admin-login-perk-icon svg {
+  width: 17px;
+  height: 17px;
+  color: var(--admin-login-blue);
+}
+
+/* =========================================================
+   RIGHT — CARD
+========================================================= */
+
+.admin-login-form-panel {
+  flex: 1 1 420px;
+  max-width: 460px;
+  max-height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.admin-login-form-container {
+  width: 100%;
+  max-width: 420px;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.admin-login-mobile-logo {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  flex-shrink: 0;
+}
+
+.admin-login-card {
+  padding: clamp(20px, 3vh, 36px) 32px clamp(16px, 2.4vh, 28px);
+  
+  background: var(--admin-login-white);
+  border: 1px solid var(--admin-login-blue-soft);
+  box-shadow:
+    0 30px 60px rgba(11, 24, 63, 0.14),
+    0 8px 20px rgba(11, 24, 63, 0.06);
+  overflow-y: auto;
+  max-height: 100%;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.admin-login-header {
+  margin-bottom: clamp(14px, 2vh, 22px);
+}
+
+.admin-login-header-label {
+  display: inline-block;
+  margin-bottom: 6px;
+  color: var(--admin-login-blue);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.admin-login-header h1 {
+  margin: 0;
+      color: #ffc928;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.6px;
+}
+
+.admin-login-header p {
+  margin: 6px 0 0;
+  color: var(--admin-login-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.admin-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 1.8vh, 19px);
+}
+
+.admin-login-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 13px;
+  border: 1px solid #fecdd3;
+  border-radius: 10px;
+  background: var(--admin-login-danger-bg);
+  color: #be123c;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.admin-login-error-icon {
+  display: flex;
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--admin-login-danger);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+/* =========================================================
+   SUBMIT
+========================================================= */
+
+.admin-login-submit {
+  width: 100% !important;
+  min-height: 46px;
+  margin-top: 4px;
+  border-radius: 999px !important;
+  background: var(--admin-login-blue) !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  box-shadow: 0 10px 22px rgba(23, 59, 143, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.admin-login-submit:hover {
+  transform: translateY(-2px);
+  background: var(--admin-login-blue-dark) !important;
+  box-shadow: 0 14px 26px rgba(23, 59, 143, 0.38);
+}
+
+/* =========================================================
+   BACK LINK
+========================================================= */
+
+.admin-login-back-text {
+  margin: clamp(16px, 2.2vh, 22px) 0 0;
+  padding-top: clamp(12px, 1.6vh, 16px);
+  border-top: 1px solid #f1f2f4;
+  color: var(--admin-login-muted);
+  font-size: 12.5px;
+  text-align: center;
+}
+
+.admin-login-back-link {
+  color: var(--admin-login-blue);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.admin-login-back-link:hover {
+  color: var(--admin-login-blue-dark);
+  text-decoration: underline;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+  .admin-login-content {
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .admin-login-intro {
+    text-align: center;
+    max-width: 460px;
+  }
+
+  .admin-login-intro-text {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .admin-login-perks {
+    align-items: center;
+  }
+
+  .admin-login-perks li {
+    justify-content: center;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 780px) {
+  .admin-login-page-header {
+    padding: 14px 20px 0;
+  }
+
+  .admin-login-content {
+    padding: 10px 20px 20px;
+    gap: 16px;
+  }
+
+  .admin-login-intro {
+    display: none;
+  }
+
+  .admin-login-mobile-logo {
+    display: flex;
+  }
+
+  .admin-login-card {
+    padding: 22px 20px 18px;
+    border-radius: 20px;
+  }
+
+  .admin-login-blob-bottom {
+    left: -30%;
+    bottom: -22%;
+    width: 120%;
+    height: 55%;
+  }
+
+  .admin-login-blob-top {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .admin-login-header h1 {
+    font-size: 21px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-login-submit {
+    transition: none;
+  }
+}

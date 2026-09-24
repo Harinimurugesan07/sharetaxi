@@ -1,0 +1,2658 @@
+/* ========================================
+   LANDING PAGE
+======================================== */
+
+.landing-page {
+  min-height: 100vh;
+  background: #f3fbfc;
+  color: #0b183f;
+}
+
+/* ========================================
+   TOP BAR
+======================================== */
+
+.landing-topbar {
+  display: none;
+  background: #0b183f;
+  color: #ddebff;
+}
+
+.landing-topbar-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 10px 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  font-size: 12px;
+}
+
+.landing-topbar-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.landing-topbar-icon {
+  width: 16px;
+  height: 16px;
+  color: #ffc928;
+}
+
+@media (min-width: 640px) {
+  .landing-topbar {
+    display: block;
+  }
+}
+
+/* ========================================
+   HERO
+======================================== */
+
+.landing-hero {
+  position: relative;
+  min-height: 620px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.landing-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.88),
+    rgba(0, 0, 0, 0.62),
+    rgba(0, 0, 0, 0.28)
+  );
+}
+
+.landing-hero-glow {
+  position: absolute;
+  width: 288px;
+  height: 288px;
+  top: 80px;
+  left: -80px;
+  border-radius: 50%;
+  background: rgba(255, 201, 40, 0.12);
+  filter: blur(70px);
+  pointer-events: none;
+}
+
+.landing-hero-container {
+  position: relative;
+  z-index: 2;
+  max-width: 1280px;
+  min-height: 620px;
+  margin: 0 auto;
+  padding: 64px 32px;
+  display: flex;
+  align-items: center;
+}
+
+.landing-hero-content {
+  max-width: 700px;
+  animation: landingFadeUp 0.6s ease-out both;
+}
+
+/* ========================================
+   HERO BADGE
+======================================== */
+
+.landing-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: #ffc928;
+  color: #0b183f;
+  font-size: 13px;
+  font-weight: 800;
+  box-shadow: 0 8px 24px rgba(255, 201, 40, 0.25);
+}
+
+.landing-badge-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* ========================================
+   HERO TEXT
+======================================== */
+
+.landing-hero-title {
+  margin: 24px 0 0;
+  color: #ffffff;
+  font-size: clamp(48px, 7vw, 80px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -2px;
+}
+
+.landing-hero-title span {
+  color: #ffc928;
+}
+
+.landing-hero-description {
+  max-width: 600px;
+  margin: 24px 0 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+/* ========================================
+   HERO BUTTONS
+======================================== */
+
+.landing-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 32px;
+}
+
+.landing-primary-button {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+.landing-driver-button {
+  border-color: rgba(255, 255, 255, 0.55) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+}
+
+.landing-driver-button:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* ========================================
+   TRUST SECTION
+======================================== */
+
+.landing-trust-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+  margin-top: 36px;
+}
+
+.landing-avatars {
+  display: flex;
+}
+
+.landing-avatar {
+  width: 42px;
+  height: 42px;
+  margin-left: -10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  background: rgba(11, 24, 63, 0.95);
+  color: #ffc928;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.landing-avatar:first-child {
+  margin-left: 0;
+}
+
+.landing-stars {
+  display: flex;
+  gap: 3px;
+}
+
+.landing-star {
+  width: 15px;
+  height: 15px;
+  color: #ffc928;
+}
+
+.landing-rating p {
+  margin: 6px 0 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+}
+
+/* ========================================
+   BENEFITS
+======================================== */
+
+.landing-benefits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.landing-benefit {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.35);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+}
+
+.landing-benefit svg {
+  color: #ffc928;
+}
+
+/* ========================================
+   CITY MARQUEE
+======================================== */
+
+.landing-city-bar {
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  padding: 14px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(26, 35, 160, 0.55);
+  backdrop-filter: blur(10px);
+}
+
+.landing-city-marquee {
+  display: flex;
+  width: max-content;
+  gap: 40px;
+  padding-right: 40px;
+  animation: landingMarquee 30s linear infinite;
+}
+
+.landing-city-marquee:hover {
+  animation-play-state: paused;
+}
+
+.landing-city-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.landing-city-item svg {
+  color: #ffc928;
+}
+
+/* ========================================
+   ANIMATIONS
+======================================== */
+
+@keyframes landingFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes landingMarquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (min-width: 1024px) {
+  .landing-hero {
+    min-height: 680px;
+  }
+
+  .landing-hero-container {
+    min-height: 680px;
+  }
+}
+
+@media (max-width: 768px) {
+  .landing-hero-container {
+    padding: 80px 20px;
+  }
+
+  .landing-hero-title {
+    font-size: 48px;
+    letter-spacing: -1px;
+  }
+
+  .landing-hero-description {
+    font-size: 16px;
+  }
+
+  .landing-hero-actions {
+    width: 100%;
+  }
+
+  .landing-hero-actions .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .landing-hero-title {
+    font-size: 40px;
+  }
+
+  .landing-topbar-container {
+    padding: 8px 16px;
+  }
+}
+
+
+
+
+/* ========================================
+   COMMON LANDING SECTION
+======================================== */
+
+.landing-container {
+  width: min(1280px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.landing-section-heading {
+  max-width: 650px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.landing-section-label {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 14px;
+  margin-bottom: 14px;
+  border-radius: 999px;
+  background: rgba(255, 201, 40, 0.15);
+  color: #0b183f;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.landing-section-heading h2,
+.landing-routes-header h2 {
+  margin: 0;
+  color: #0b183f;
+  font-size: clamp(30px, 4vw, 42px);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.landing-section-heading p,
+.landing-routes-header p {
+  margin: 14px 0 0;
+  color: #667085;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* ========================================
+   WHY SHARETAXI
+======================================== */
+
+.landing-features-section {
+  padding: 90px 0;
+  background: #f3fbfc;
+}
+
+.landing-features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 50px;
+}
+
+.landing-feature-card {
+  position: relative;
+  padding: 28px !important;
+  border: 1px solid rgba(11, 24, 63, 0.08);
+ 
+  background: #ffffff;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.landing-feature-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255, 201, 40, 0.6);
+  box-shadow: 0 20px 45px rgba(11, 24, 63, 0.12);
+}
+
+.landing-feature-icon {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: linear-gradient(
+    135deg,
+    #ffc928,
+    #f0b400
+  );
+  box-shadow: 0 10px 24px rgba(255, 201, 40, 0.25);
+}
+
+.landing-feature-icon svg {
+  width: 24px;
+  height: 24px;
+  color: #0b183f;
+}
+
+.landing-feature-card h3 {
+  margin: 22px 0 0;
+  color: #0b183f;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.landing-feature-card p {
+  margin: 10px 0 0;
+  color: #667085;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* ========================================
+   POPULAR ROUTES
+======================================== */
+
+.landing-routes-section {
+  padding: 90px 0;
+  background: #ffffff;
+}
+
+.landing-routes-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.landing-routes-header h2 {
+  margin-top: 4px;
+}
+
+.landing-view-routes {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 4px;
+  color: #173b8f;
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: 0.25s ease;
+}
+
+.landing-view-routes:hover {
+  color: #f0b400;
+  border-bottom-color: #ffc928;
+}
+
+.landing-view-routes svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.25s ease;
+}
+
+.landing-view-routes:hover svg {
+  transform: translateX(4px);
+}
+
+.landing-routes-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 45px;
+}
+
+/* Route card */
+
+.landing-route-card {
+  overflow: hidden;
+  padding: 0 !important;
+  border: 1px solid rgba(11, 24, 63, 0.08);
+  
+  background: #ffffff;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.landing-route-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 20px 45px rgba(11, 24, 63, 0.14);
+}
+
+.landing-route-image {
+  position: relative;
+  height: 145px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(255, 201, 40, 0.25),
+      transparent 40%
+    ),
+    linear-gradient(
+      135deg,
+      #173b8f,
+      #0b183f
+    );
+}
+
+.landing-route-image::before {
+  content: "";
+  position: absolute;
+  width: 170px;
+  height: 170px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  
+}
+
+.landing-route-icon {
+  position: relative;
+  z-index: 2;
+  width: 45px;
+  height: 45px;
+  color: #ffc928;
+}
+
+.landing-popular-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 3;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #ffc928;
+  color: #0b183f;
+  font-size: 11px;
+  font-weight: 800;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.landing-route-content {
+  padding: 20px;
+}
+
+.landing-route-content h3 {
+  margin: 0;
+  overflow: hidden;
+  color: #0b183f;
+  font-size: 15px;
+  font-weight: 800;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.landing-route-content h3 span {
+  margin: 0 6px;
+  color: #ffc928;
+}
+
+.landing-route-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.landing-route-time {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #667085;
+  font-size: 13px;
+}
+
+.landing-route-time svg {
+  width: 15px;
+  height: 15px;
+  color: #173b8f;
+}
+
+.landing-route-details strong {
+  color: #0b183f;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.landing-routes-empty {
+  grid-column: 1 / -1;
+  padding: 24px 20px;
+  border: 1px dashed rgba(11, 24, 63, 0.18);
+  border-radius: 18px;
+  background: #f8fafc;
+  color: #667085;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* ========================================
+   RESPONSIVE - FEATURES & ROUTES
+======================================== */
+
+@media (max-width: 1024px) {
+  .landing-features-grid,
+  .landing-routes-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .landing-container {
+    width: min(100% - 32px, 1280px);
+  }
+
+  .landing-features-section,
+  .landing-routes-section {
+    padding: 65px 0;
+  }
+
+  .landing-features-grid,
+  .landing-routes-grid {
+    grid-template-columns: 1fr;
+    margin-top: 35px;
+  }
+
+  .landing-routes-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .landing-view-routes {
+    padding-bottom: 2px;
+  }
+
+  .landing-feature-card {
+    padding: 24px !important;
+  }
+}
+
+
+
+
+
+
+
+
+/* ========================================
+   SHARETAXI NETWORK
+======================================== */
+
+.landing-network-section {
+  padding: 90px 0;
+  background: #f3fbfc;
+}
+
+.landing-network-card {
+  position: relative;
+  margin-top: 50px;
+  padding: 30px !important;
+  overflow: hidden;
+  border: 1px solid rgba(23, 59, 143, 0.08);
+  border-radius: 24px !important;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(255, 201, 40, 0.16),
+      transparent 35%
+    ),
+    #ffffff;
+  box-shadow: 0 20px 50px rgba(23, 59, 143, 0.08);
+}
+
+.landing-network-card::before {
+  content: "";
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  right: -100px;
+  bottom: -100px;
+  border-radius: 50%;
+  background: rgba(23, 59, 143, 0.04);
+}
+
+.landing-network-map {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  max-width: 600px;
+  height: 360px;
+  margin: 0 auto;
+}
+
+
+/* ========================================
+   PASSENGER & DRIVER SECTION
+======================================== */
+
+.landing-role-section {
+  padding: 90px 0;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(255, 201, 40, 0.16),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #173b8f,
+      #0b183f
+    );
+}
+
+.landing-role-heading {
+  max-width: 650px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.landing-role-label {
+  display: inline-flex;
+  padding: 7px 14px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(255, 201, 40, 0.25);
+  border-radius: 999px;
+  background: rgba(255, 201, 40, 0.12);
+  color: #ffc928;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.landing-role-heading h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(32px, 4vw, 44px);
+  font-weight: 800;
+}
+
+.landing-role-heading p {
+  margin: 16px auto 0;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+
+/* Role cards */
+
+.landing-role-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  margin-top: 50px;
+}
+
+.landing-role-card {
+  position: relative;
+  padding: 34px !important;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  /* border-radius: 24px !important; */
+  background: #ffffff;
+  overflow: hidden;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.landing-role-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+.landing-role-card::after {
+  content: "";
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  right: -80px;
+  top: -80px;
+  border-radius: 50%;
+  background: rgba(255, 201, 40, 0.08);
+}
+
+.landing-driver-card::after {
+  background: rgba(23, 59, 143, 0.08);
+}
+
+
+/* Role icon */
+
+.landing-role-icon {
+  position: relative;
+  z-index: 1;
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  background: linear-gradient(
+    135deg,
+    #ffc928,
+    #f0b400
+  );
+}
+
+.landing-role-icon svg {
+  width: 28px;
+  height: 28px;
+  color: #0b183f;
+}
+
+.landing-role-card h3 {
+  position: relative;
+  z-index: 1;
+  margin: 24px 0 0;
+  color: #0b183f;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.landing-role-description {
+  position: relative;
+  z-index: 1;
+  margin: 10px 0 0;
+  color: #667085;
+  line-height: 1.6;
+}
+
+
+/* Benefits list */
+
+.landing-role-list {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 28px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.landing-role-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: #4b5563;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.landing-role-list svg {
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  color: #1ca652;
+}
+
+
+/* Buttons */
+
+.landing-role-button {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.landing-role-button svg {
+  width: 18px;
+  height: 18px;
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 768px) {
+
+  .landing-network-section,
+  .landing-role-section {
+    padding: 65px 0;
+  }
+
+  .landing-network-card {
+    margin-top: 35px;
+    padding: 20px !important;
+  }
+
+  .landing-network-map {
+    height: 280px;
+  }
+
+  .landing-role-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-top: 35px;
+  }
+
+  .landing-role-card {
+    padding: 26px !important;
+  }
+
+}
+/* ========================================
+   GET THE APP SECTION
+======================================== */
+
+.landing-app-section {
+  position: relative;
+  overflow: hidden;
+  padding: 100px 0;
+  background:
+    radial-gradient(
+      circle at 85% 20%,
+      rgba(255, 201, 40, 0.18),
+      transparent 25%
+    ),
+    linear-gradient(
+      135deg,
+      #f3fbfc,
+      #ffffff
+    );
+}
+
+.landing-app-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 70px;
+}
+
+
+/* ========================================
+   APP CONTENT
+======================================== */
+
+.landing-app-content {
+  max-width: 620px;
+}
+
+.landing-app-label {
+  display: inline-block;
+  padding: 8px 15px;
+  margin-bottom: 18px;
+  border-radius: 999px;
+  background: rgba(255, 201, 40, 0.15);
+  color: #173b8f;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.landing-app-content h2 {
+  margin: 0;
+  color: #0b183f;
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.landing-app-content h2 span {
+  display: block;
+  color: #173b8f;
+}
+
+.landing-app-content > p {
+  max-width: 560px;
+  margin: 22px 0 0;
+  color: #667085;
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+
+/* ========================================
+   APP BENEFITS
+======================================== */
+
+.landing-app-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.landing-app-benefit {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #334155;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.landing-app-benefit svg {
+  flex-shrink: 0;
+  width: 21px;
+  height: 21px;
+  color: #1ca652;
+}
+
+
+/* ========================================
+   STORE BUTTONS
+======================================== */
+
+.landing-app-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 34px;
+}
+
+.landing-store-button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 175px;
+  padding: 11px 17px;
+ 
+  color: #ffffff;
+  cursor: pointer;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.landing-store-button-image {
+  min-width: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  overflow: hidden;
+}
+
+.landing-store-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(11, 24, 63, 0.2);
+}
+
+.landing-store-image {
+  display: block;
+  width: 210px;
+  height: auto;
+ 
+  box-shadow: 0 14px 30px rgba(11, 24, 63, 0.18);
+  object-fit: contain;
+}
+
+.landing-store-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  font-size: 24px;
+}
+
+.landing-store-button span:last-child {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.landing-store-button small {
+  font-size: 9px;
+  opacity: 0.75;
+}
+
+.landing-store-button strong {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+
+/* ========================================
+   PHONE PREVIEW
+======================================== */
+
+.landing-phone-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.landing-phone-wrapper::before {
+  content: "";
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: rgba(255, 201, 40, 0.2);
+  filter: blur(50px);
+}
+
+.landing-phone {
+  position: relative;
+  z-index: 2;
+  width: 300px;
+  padding: 10px;
+  border: 8px solid #0b183f;
+  border-radius: 42px;
+  background: #0b183f;
+  box-shadow:
+    0 30px 60px rgba(11, 24, 63, 0.28),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.landing-phone-notch {
+  position: absolute;
+  z-index: 5;
+  top: 8px;
+  left: 50%;
+  width: 110px;
+  height: 24px;
+  transform: translateX(-50%);
+  border-radius: 0 0 15px 15px;
+  background: #0b183f;
+}
+
+.landing-phone-screen {
+  min-height: 560px;
+  padding: 42px 16px 16px;
+  overflow: hidden;
+  border-radius: 32px;
+  background: #f7fafc;
+}
+
+
+/* ========================================
+   PHONE CONTENT
+======================================== */
+
+.landing-phone-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.landing-phone-header div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.landing-phone-header span {
+  color: #94a3b8;
+  font-size: 11px;
+}
+
+.landing-phone-header strong {
+  color: #0b183f;
+  font-size: 15px;
+}
+
+.landing-phone-profile {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #ffc928;
+  color: #0b183f;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+
+/* Location cards */
+
+.landing-phone-location {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-top: 18px;
+  padding: 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.landing-location-dot {
+  width: 11px;
+  height: 11px;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.landing-location-dot.pickup {
+  background: #1ca652;
+}
+
+.landing-location-dot.destination {
+  background: #ef4444;
+}
+
+.landing-phone-location div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.landing-phone-location small {
+  color: #94a3b8;
+  font-size: 9px;
+}
+
+.landing-phone-location strong {
+  color: #0b183f;
+  font-size: 11px;
+}
+
+
+/* Map area */
+
+.landing-phone-map {
+  position: relative;
+  height: 155px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 15px;
+  overflow: hidden;
+  border-radius: 15px;
+  background:
+    linear-gradient(
+      45deg,
+      rgba(23, 59, 143, 0.05) 25%,
+      transparent 25%
+    ),
+    linear-gradient(
+      -45deg,
+      rgba(23, 59, 143, 0.05) 25%,
+      transparent 25%
+    ),
+    #eaf3f5;
+}
+
+.landing-phone-map::before {
+  content: "";
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  border: 2px dashed rgba(23, 59, 143, 0.25);
+  border-radius: 50%;
+}
+
+.landing-phone-map svg {
+  position: relative;
+  z-index: 1;
+  width: 34px;
+  height: 34px;
+  color: #173b8f;
+}
+
+.landing-phone-map span {
+  position: relative;
+  z-index: 1;
+  color: #173b8f;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+
+/* Ride card */
+
+.landing-phone-ride-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgba(11, 24, 63, 0.08);
+}
+
+.landing-mini-car {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: #fff5cc;
+}
+
+.landing-mini-car svg {
+  width: 20px;
+  height: 20px;
+  color: #173b8f;
+}
+
+.landing-phone-ride-card > div:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 3px;
+}
+
+.landing-phone-ride-card strong {
+  color: #0b183f;
+  font-size: 11px;
+}
+
+.landing-phone-ride-card span {
+  color: #94a3b8;
+  font-size: 9px;
+}
+
+.landing-ride-price {
+  color: #173b8f;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+
+/* Find ride button */
+
+.landing-phone-button {
+  width: 100%;
+  margin-top: 16px;
+  padding: 13px;
+  border: none;
+  border-radius: 12px;
+  background: #ffc928;
+  color: #0b183f;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 900px) {
+
+  .landing-app-section {
+    padding: 70px 0;
+  }
+
+  .landing-app-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .landing-app-content {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .landing-app-content > p {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .landing-app-benefits {
+    align-items: center;
+  }
+
+  .landing-app-buttons {
+    justify-content: center;
+  }
+
+  .landing-phone-wrapper {
+    order: 2;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .landing-app-buttons {
+    flex-direction: column;
+  }
+
+  .landing-store-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .landing-phone {
+    width: 280px;
+  }
+
+  .landing-phone-screen {
+    min-height: 520px;
+  }
+
+}
+
+/* ========================================
+   SHARETAXI PHONE IMAGE PREVIEW
+======================================== */
+
+.landing-phone-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.landing-phone-frame {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  animation: landingPhoneFloat 4s ease-in-out infinite;
+}
+
+/* Main phone device */
+
+.landing-phone-device {
+  position: relative;
+  z-index: 2;
+  padding: 8px;
+  overflow: hidden;
+  border: 9px solid #0b183f;
+  border-radius: 42px;
+  background: #0b183f;
+  box-shadow:
+    0 30px 60px rgba(11, 24, 63, 0.35),
+    0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Phone screen */
+
+.landing-phone-image-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 30px;
+  background: #ffffff;
+}
+
+/* Actual uploaded image */
+
+.landing-phone-preview-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 19.5;
+  object-fit: cover;
+  object-position: top;
+}
+
+/* Phone notch */
+
+.landing-phone-notch {
+  position: absolute;
+  z-index: 5;
+  top: -1px;
+  left: 50%;
+  width: 115px;
+  height: 26px;
+  transform: translateX(-50%);
+  border-radius: 0 0 18px 18px;
+  background: #0b183f;
+}
+
+/* Phone side buttons */
+
+.landing-phone-side-button {
+  position: absolute;
+  z-index: 1;
+  background: #17234b;
+}
+
+/* Left volume buttons */
+
+.landing-phone-volume-1 {
+  top: 95px;
+  left: -4px;
+  width: 4px;
+  height: 35px;
+  border-radius: 4px 0 0 4px;
+}
+
+.landing-phone-volume-2 {
+  top: 145px;
+  left: -4px;
+  width: 4px;
+  height: 55px;
+  border-radius: 4px 0 0 4px;
+}
+
+/* Right power button */
+
+.landing-phone-power {
+  top: 120px;
+  right: -4px;
+  width: 4px;
+  height: 65px;
+  border-radius: 0 4px 4px 0;
+}
+
+/* Floating animation */
+
+@keyframes landingPhoneFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+/* Responsive */
+
+@media (max-width: 480px) {
+  .landing-phone-frame {
+    max-width: 270px;
+  }
+
+  .landing-phone-device {
+    border-radius: 36px;
+  }
+
+  .landing-phone-image-container {
+    border-radius: 25px;
+  }
+}
+
+
+/* =========================================
+   GET THE APP
+========================================= */
+
+.landing-app-section {
+  position: relative;
+  overflow: hidden;
+  padding: 60px 0;
+  background: linear-gradient(135deg, #173b8f 0%, #0b183f 55%, #07112f 100%);
+}
+
+.landing-app-pattern {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.08;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.4) 1px, transparent 1px);
+  background-size: 42px 42px;
+  pointer-events: none;
+}
+
+.landing-app-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  gap: 40px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.landing-app-content {
+  order: 2;
+  text-align: center;
+}
+
+.landing-app-phone {
+  order: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.landing-app-label {
+  display: inline-flex;
+  padding: 8px 15px;
+  border-radius: 999px;
+  background: rgba(255, 201, 40, 0.16);
+  color: #ffc928;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.landing-app-content h2 {
+  margin: 22px 0 0;
+  color: #ffffff;
+  font-size: clamp(28px, 5vw, 44px);
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.landing-app-content p {
+  max-width: 480px;
+  margin: 20px auto 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.landing-app-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 32px;
+}
+
+.landing-store-button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  
+  color: #ffffff;
+  text-decoration: none;
+  transition: 0.25s ease;
+}
+
+.landing-store-button:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.landing-store-icon {
+  width: 25px;
+  height: 25px;
+  flex: 0 0 auto;
+  color: #ffffff;
+}
+
+.landing-store-icon-fill {
+  fill: #ffffff;
+}
+
+.landing-store-button span {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.landing-store-button small {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+.landing-store-button strong {
+  font-size: 15px;
+}
+
+/* =========================================
+   RESPONSIVE — two columns, phone on the right
+========================================= */
+
+@media (min-width: 1024px) {
+  .landing-app-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+  }
+
+  .landing-app-content {
+    order: 1;
+    text-align: left;
+  }
+
+  .landing-app-content p {
+    margin: 20px 0 0;
+  }
+
+  .landing-app-phone {
+    order: 2;
+    justify-content: flex-end;
+  }
+
+  .landing-app-buttons {
+    justify-content: flex-start;
+  }
+}
+
+
+/* =========================================
+   TESTIMONIALS
+========================================= */
+
+.landing-testimonials-section {
+  padding: 90px 0;
+  background: #ffffff;
+}
+
+.landing-testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 45px;
+}
+
+.landing- {
+  padding: 28px !important;
+  border: 1px solid rgba(11, 24, 63, 0.08);
+  border-radius: 20px !important;
+  background: #ffffff;
+  transition: 0.3s ease;
+}
+
+.landing-testimonial-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(11, 24, 63, 0.1);
+  
+}
+
+.landing-testimonial-quote {
+  width: 28px;
+  height: 28px;
+  color: #ffc928;
+}
+
+.landing-testimonial-text {
+  margin: 18px 0 0;
+  color: #475467;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.landing-testimonial-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.landing-testimonial-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.landing-testimonial-user > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.landing-testimonial-user strong {
+  color: #0b183f;
+  font-size: 14px;
+}
+
+.landing-testimonial-user span {
+  color: #667085;
+  font-size: 12px;
+}
+
+.landing-initials-avatar {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #173b8f;
+  color: #ffc928;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.landing-testimonial-stars {
+  display: flex;
+  gap: 3px;
+}
+
+.landing-testimonial-stars svg {
+  width: 14px;
+  height: 14px;
+  color: #ffc928;
+}
+
+
+/* =========================================
+   NEWSLETTER
+========================================= */
+
+.landing-newsletter-section {
+  padding: 0 0 90px;
+  background: #ffffff;
+}
+
+.landing-newsletter-card {
+  display: grid;
+  grid-template-columns: 1.2fr 0.4fr;
+  align-items: center;
+  gap: 40px;
+  padding: 50px;
+  overflow: hidden;
+ 
+  background:
+    radial-gradient(
+      circle at right top,
+      rgba(255, 201, 40, 0.18),
+      transparent 35%
+    ),
+    #0b183f;
+}
+
+.landing-newsletter-label {
+  color: #ffc928;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.landing-newsletter-content h3 {
+  margin: 12px 0 0;
+  color: #ffffff;
+  font-size: clamp(25px, 4vw, 36px);
+}
+
+.landing-newsletter-content p {
+  max-width: 600px;
+  margin-top: 12px;
+  color: rgba(255, 255, 255, 0.68);
+  line-height: 1.7;
+}
+
+.landing-newsletter-form {
+  display: flex;
+  gap: 12px;
+  max-width: 600px;
+  margin-top: 25px;
+}
+
+.landing-email-input {
+  position: relative;
+  flex: 1;
+}
+
+.landing-email-input svg {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  width: 18px;
+  height: 18px;
+  color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-50%);
+}
+
+.landing-email-input input {
+  width: 100%;
+  padding: 14px 15px 14px 45px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.landing-email-input input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.landing-subscribe-button {
+  flex-shrink: 0;
+}
+
+.landing-subscribe-success {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 25px;
+  color: #ffc928;
+  font-weight: 700;
+}
+
+.landing-newsletter-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.landing-newsletter-icon > svg {
+  width: 100px;
+  height: 100px;
+  padding: 28px;
+  border-radius: 50%;
+  background: rgba(255, 201, 40, 0.15);
+  color: #ffc928;
+}
+
+
+
+/* =========================================
+   FAQ
+========================================= */
+
+.landing-faq-section {
+  padding: 90px 20px;
+  background: #f3fbfc;
+}
+
+.landing-faq-container {
+  width: min(1100px, 100%);
+  margin: 0 auto;
+}
+
+.landing-faq-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 60px;
+  align-items: start;
+}
+
+/* ---- Left side ---- */
+
+.landing-faq-side {
+  position: sticky;
+  top: 110px;
+}
+
+.landing-faq-side h2 {
+  margin: 14px 0 16px;
+}
+
+.landing-faq-side-text {
+  color: #667085;
+  font-size: 15px;
+  line-height: 1.7;
+  max-width: 420px;
+  margin: 0 0 28px;
+}
+
+.landing-faq-contact-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 22px;
+  border-radius: 18px;
+  background: #ffffff;
+  border: 1px solid rgba(11, 24, 63, 0.08);
+  box-shadow: 0 10px 30px rgba(11, 24, 63, 0.06);
+}
+
+.landing-faq-contact-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(255, 184, 0, 0.15);
+  color: #b57a00;
+}
+
+.landing-faq-contact-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #0b183f;
+}
+
+.landing-faq-contact-sub {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: #667085;
+}
+
+.landing-faq-contact-btn {
+  margin-left: auto;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 999px;
+  background: #173b8f;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.landing-faq-contact-btn:hover {
+  background: #0b183f;
+}
+
+/* ---- Right side (accordion list) ---- */
+
+.landing-faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.landing-faq-card {
+  padding: 0 !important;
+  overflow: hidden;
+  border: 1px solid rgba(11, 24, 63, 0.08);
+  border-radius: 16px !important;
+  background: #ffffff;
+}
+
+.landing-faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 22px;
+  border: none;
+  background: transparent;
+  color: #0b183f;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.landing-faq-arrow {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: #173b8f;
+  transition: transform 0.3s ease;
+}
+
+.landing-faq-arrow-open {
+  transform: rotate(180deg);
+}
+
+.landing-faq-answer-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+
+.landing-faq-answer-wrapper.landing-faq-answer-open {
+  grid-template-rows: 1fr;
+}
+
+.landing-faq-answer {
+  overflow: hidden;
+}
+
+.landing-faq-answer p {
+  margin: 0;
+  padding: 0 22px 20px;
+  color: #667085;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 860px) {
+  .landing-faq-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .landing-faq-side {
+    position: static;
+  }
+}
+
+/* =========================================
+   FINAL CTA
+========================================= */
+
+.landing-final-cta-section {
+  padding: 0 0 90px;
+  background: #f3fbfc;
+}
+
+.landing-final-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 35px;
+  padding: 45px 50px;
+  border-radius: 28px;
+  background:
+    linear-gradient(
+      135deg,
+      #ffc928,
+      #f0b400
+    );
+}
+
+.landing-final-cta-label {
+  color: #173b8f;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.landing-final-cta h3 {
+  margin: 10px 0 0;
+  color: #0b183f;
+  font-size: clamp(25px, 4vw, 36px);
+}
+
+.landing-final-cta p {
+  max-width: 650px;
+  margin: 10px 0 0;
+  color: rgba(11, 24, 63, 0.72);
+  line-height: 1.7;
+}
+
+.landing-final-cta-actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: 14px;
+}
+
+.landing-final-primary-button {
+  background: #0b183f !important;
+  color: #ffffff !important;
+}
+
+.landing-final-driver-button {
+  border: 2px solid #0b183f !important;
+  color: #0b183f !important;
+  background: transparent !important;
+}
+
+.landing-final-driver-button:hover {
+  background: rgba(11, 24, 63, 0.08) !important;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+
+  .landing-app-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .landing-app-content {
+    text-align: center;
+  }
+
+  .landing-app-content p {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .landing-app-buttons {
+    justify-content: center;
+  }
+
+  .landing-phone-preview {
+    grid-row: 1;
+  }
+
+  .landing-testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .landing-newsletter-card {
+    grid-template-columns: 1fr;
+  }
+
+  .landing-newsletter-icon {
+    display: none;
+  }
+
+  .landing-final-cta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+
+  .landing-app-section,
+  .landing-testimonials-section,
+  .landing-faq-section {
+    padding-top: 65px;
+    padding-bottom: 65px;
+  }
+
+  .landing-newsletter-section,
+  .landing-final-cta-section {
+    padding-bottom: 65px;
+  }
+
+  .landing-newsletter-card {
+    padding: 32px 24px;
+  }
+
+  .landing-newsletter-form {
+    flex-direction: column;
+  }
+
+  .landing-final-cta {
+    padding: 32px 24px;
+  }
+
+  .landing-final-cta-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .landing-final-cta-actions a,
+  .landing-final-cta-actions button {
+    width: 100%;
+  }
+}
+
+
+/* =========================================
+   SMALL PHONE MOCKUP
+========================================= */
+
+.landing-phone-mock {
+  width: 100%;
+  max-width: 220px;
+  margin: 0 auto;
+}
+
+.landing-phone-mock-device {
+  position: relative;
+  overflow: hidden;
+  border: 6px solid #0b183f;
+  border-radius: 32px;
+  background: #ffffff;
+  box-shadow: 0 20px 40px rgba(11, 24, 63, 0.18);
+}
+
+.landing-phone-mock-speaker {
+  width: 48px;
+  height: 6px;
+  margin: 8px auto;
+  border-radius: 999px;
+  background: #dbe4f0;
+}
+
+.landing-phone-mock-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 19;
+  object-fit: cover;
+  object-position: top;
+}
+
+.landing-phone-mock-content {
+  padding: 12px;
+}
+
+.landing-phone-mock-label {
+  margin: 12px 0 0;
+  color: #667085;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+}
+
+@keyframes landing-marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.landing-city-marquee {
+  animation: landing-marquee 30s linear infinite;
+}
+
+.landing-city-marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes landing-fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-section {
+  opacity: 0;
+  animation: landing-fade-up 0.7s ease-out forwards;
+}
+
+@keyframes landing-route-dash {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+.route-line {
+  animation: landing-route-dash 1s linear infinite;
+}
+
+@keyframes landing-dot-ping {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.8);
+    opacity: 0.3;
+  }
+}
+
+.dot-ping {
+  animation: landing-dot-ping 2s ease-in-out infinite;
+}
+
+.landing-stat-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.landing-stat-skeleton-number {
+  width: 64px;
+  height: 28px;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.landing-stat-skeleton-label {
+  width: 96px;
+  height: 12px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+
+
+
+
+/* =========================================
+   LEGAL BAR
+========================================= */
+
+.landing-legal-bar {
+  background:  #1E3D9A;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.landing-legal-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 18px 32px;
+
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 12px;
+}
+
+.landing-legal-container p {
+  margin: 0;
+}
+
+.landing-legal-links {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.landing-legal-links a {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.landing-legal-links a:hover {
+  color: #ffc928;
+}
+
+.landing-legal-divider {
+  width: 1px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.landing-legal-bar a:focus-visible {
+  outline: 2px solid #ffc928;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+@media (max-width: 640px) {
+  .landing-legal-container {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 18px 20px;
+  }
+
+  .landing-legal-links {
+    flex-wrap: wrap;
+  }
+}
+
+
+/* =========================================
+   LATEST BLOGS — MOVING MARQUEE CARDS
+========================================= */
+
+.landing-blogs-section {
+  padding: 90px 0;
+  overflow: hidden;
+  background: #f3fbfc;
+}
+
+.landing-blogs-marquee {
+  margin-top: 50px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+}
+
+.landing-blogs-track {
+  display: flex;
+  width: max-content;
+  gap: 24px;
+  padding: 4px 0 4px 24px;
+  animation: landing-blogs-scroll 32s linear infinite;
+}
+
+.landing-blogs-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes landing-blogs-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.landing-blog-card {
+  flex: 0 0 auto;
+  width: 340px;
+  overflow: hidden;
+  border: 1px solid rgba(11, 24, 63, 0.08);
+  
+  background: #ffffff;
+  text-decoration: none;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.landing-blog-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 20px 45px rgba(11, 24, 63, 0.14);
+}
+
+.landing-blog-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: #0b183f;
+}
+
+.landing-blog-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.landing-blog-card:hover .landing-blog-image img {
+  transform: scale(1.06);
+}
+
+.landing-blog-content {
+  padding: 22px;
+}
+
+.landing-blog-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #173b8f;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.landing-blog-content h3 {
+  margin: 12px 0 0;
+  color: #0b183f;
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.4;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.landing-blog-content p {
+  margin: 10px 0 0;
+  color: #667085;
+  font-size: 14px;
+  line-height: 1.7;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.landing-blog-readmore {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 18px;
+  color: #173b8f;
+  font-size: 13px;
+  font-weight: 800;
+  transition: 0.25s ease;
+}
+
+.landing-blog-card:hover .landing-blog-readmore {
+  color: #f0b400;
+}
+
+.landing-blog-readmore svg {
+  transition: transform 0.25s ease;
+}
+
+.landing-blog-card:hover .landing-blog-readmore svg {
+  transform: translateX(4px);
+}
+
+/* Responsive */
+
+@media (max-width: 640px) {
+  .landing-blogs-section {
+    padding: 65px 0;
+  }
+
+  .landing-blog-card {
+    width: 280px;
+  }
+
+  .landing-blogs-track {
+    animation-duration: 24s;
+  }
+}

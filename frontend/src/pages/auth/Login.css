@@ -1,0 +1,531 @@
+/* =========================================================
+   SHARETAXI LOGIN — Passenger / Driver
+   Light floating-card layout, on-brand navy + yellow theme.
+   Uses the same shared design tokens as AdminLogin/OperatorLogin
+   (--color-navy-*, --color-primary, --color-danger-*, --color-bg,
+   --color-surface) instead of a separate local palette.
+========================================================= */
+
+/* =========================================================
+   PAGE — locked to viewport, no scroll
+========================================================= */
+
+html,
+body {
+  height: 100%;
+}
+
+.login-page {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+}
+
+.login-page-header {
+  position: relative;
+  z-index: 3;
+  flex-shrink: 0;
+  padding: clamp(14px, 2vh, 28px) 48px 0;
+}
+
+/* =========================================================
+   BACKGROUND BLOBS
+========================================================= */
+
+.login-blob {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.login-blob-bottom {
+  left: -10%;
+  bottom: -22%;
+  width: 60%;
+  height: 80%;
+  background: var(--color-navy-900);
+  border-radius: 58% 42% 44% 56% / 52% 46% 54% 48%;
+  opacity: 0.06;
+}
+
+.login-blob-top {
+  top: -8%;
+  right: 4%;
+  width: 20%;
+  height: 26%;
+  background: var(--color-primary-soft);
+  border-radius: 40% 60% 55% 45% / 45% 55% 45% 55%;
+  opacity: 0.9;
+}
+
+/* =========================================================
+   CONTENT LAYOUT — fills remaining viewport height
+========================================================= */
+
+.login-content {
+  position: relative;
+  z-index: 2;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(30px, 6vw, 90px);
+  padding: clamp(10px, 2vh, 30px) 48px;
+}
+
+/* =========================================================
+   LEFT — TEXT INTRO
+========================================================= */
+
+.login-intro {
+  flex: 1 1 420px;
+  max-width: 480px;
+}
+
+.login-intro-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid var(--color-primary-soft);
+  border-radius: 999px;
+  background: var(--color-primary-soft);
+  color: var(--color-primary-ink);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.9px;
+}
+
+.login-intro-title {
+  margin: clamp(14px, 2.4vh, 22px) 0 0;
+  color: var(--color-navy-800);
+  font-size: clamp(28px, 3.4vw, 44px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.8px;
+}
+
+.login-intro-text {
+  margin: clamp(10px, 1.8vh, 16px) 0 0;
+  max-width: 380px;
+  color: var(--color-navy-400);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+/* =========================================================
+   RIGHT — CARD
+========================================================= */
+
+.login-card {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 420px;
+  max-height: 100%;
+  overflow-y: auto;
+  padding: clamp(20px, 3vh, 36px) 32px clamp(16px, 2.4vh, 28px);
+  
+  background: var(--color-surface);
+  border: 1px solid var(--color-navy-50);
+  box-shadow:
+    0 30px 60px rgba(11, 24, 63, 0.14),
+    0 8px 20px rgba(11, 24, 63, 0.06);
+}
+
+.login-card-title {
+  margin: 0;
+  text-align: center;
+color: #ffc928;
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+.login-card-subtitle {
+  margin: 6px 0 0;
+  text-align: center;
+  color: var(--color-navy-400);
+  font-size: 13px;
+}
+
+/* =========================================================
+   ROLE SELECTOR
+========================================================= */
+
+.login-role-selector {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5px;
+  padding: 5px;
+  margin: clamp(18px, 2.6vh, 26px) 0 clamp(14px, 2vh, 20px);
+  border-radius: 14px;
+  background: var(--color-navy-50);
+}
+
+.login-role-button {
+  display: flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--color-navy-400);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.login-role-button svg {
+  width: 16px;
+  height: 16px;
+}
+
+.login-role-button:hover:not(.login-role-button-active) {
+  color: var(--color-navy-600);
+}
+
+.login-role-button-active {
+  background: var(--color-navy-800);
+  color: #ffffff;
+  box-shadow: 0 8px 18px rgba(11, 24, 63, 0.2);
+}
+
+.login-role-button-active:hover {
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 1.6vh, 15px);
+}
+
+.login-field {
+  width: 100%;
+}
+
+/* Password */
+
+.login-password-wrapper {
+  position: relative;
+}
+
+.login-password-input {
+  padding-right: 48px !important;
+}
+
+.login-password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 13px;
+  display: flex;
+  width: 34px;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-navy-300);
+  transform: translateY(-50%);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.login-password-toggle:hover {
+  background: var(--color-navy-50);
+  color: var(--color-navy-700);
+}
+
+.login-password-toggle svg {
+  width: 17px;
+  height: 17px;
+}
+
+/* =========================================================
+   REMEMBER / FORGOT
+========================================================= */
+
+.login-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.login-remember {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--color-navy-400);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.login-remember input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.login-checkbox {
+  position: relative;
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  border: 1.5px solid var(--color-navy-200, #c9d5f2);
+  border-radius: 5px;
+  background: #ffffff;
+  transition: 0.2s ease;
+}
+
+.login-remember input:checked + .login-checkbox {
+  border-color: var(--color-navy-800);
+  background: var(--color-navy-800);
+}
+
+.login-remember input:checked + .login-checkbox::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  width: 4px;
+  height: 8px;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.login-forgot {
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--color-navy-700);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.login-forgot:hover {
+  color: var(--color-primary-ink);
+  text-decoration: underline;
+}
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.login-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 13px;
+  border: 1px solid rgba(220, 38, 38, 0.12);
+  border-radius: 10px;
+  background: var(--color-danger-50);
+}
+
+.login-error-icon {
+  display: flex;
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--color-danger-500);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.login-error p {
+  margin: 0;
+  color: var(--color-danger-600);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   LOGIN BUTTON
+   Styling comes from the shared Button component (same
+   pattern as admin-login-submit / operator-login-submit) —
+   only layout is set here.
+========================================================= */
+
+.login-submit-button {
+  width: 100%;
+  margin-top: 4px;
+}
+
+/* =========================================================
+   CARD FOOTER
+========================================================= */
+
+.login-card-footer {
+  margin-top: clamp(14px, 2vh, 20px);
+  padding-top: clamp(12px, 1.6vh, 16px);
+  border-top: 1px solid var(--color-navy-50);
+  text-align: center;
+}
+
+.login-need-help {
+  margin: 0 0 6px;
+  color: var(--color-navy-300);
+  font-size: 12px;
+}
+
+.login-need-help a {
+  color: var(--color-navy-700);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.login-need-help a:hover {
+  text-decoration: underline;
+}
+
+/* =========================================================
+   ADMIN / OPERATOR
+========================================================= */
+
+.login-special-access {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 4px;
+  color: var(--color-navy-300);
+  font-size: 11px;
+}
+
+.login-special-access a {
+  color: var(--color-navy-600);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.login-special-access a:hover {
+  color: var(--color-primary-ink);
+  text-decoration: underline;
+}
+
+.login-access-separator {
+  margin: 0 3px;
+  color: var(--color-navy-100);
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+  .login-content {
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .login-intro {
+    text-align: center;
+    max-width: 460px;
+  }
+
+  .login-intro-text {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* =========================================================
+   MOBILE — card only, still no page scroll
+========================================================= */
+
+@media (max-width: 780px) {
+  .login-page-header {
+    padding: 14px 20px 0;
+  }
+
+  .login-content {
+    padding: 10px 20px 20px;
+    gap: 16px;
+  }
+
+  .login-intro {
+    display: none;
+  }
+
+  .login-card {
+    padding: 22px 20px 18px;
+    border-radius: 20px;
+  }
+
+  .login-blob-bottom {
+    left: -30%;
+    bottom: -22%;
+    width: 120%;
+    height: 55%;
+  }
+
+  .login-blob-top {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .login-card-title {
+    font-size: 21px;
+  }
+
+  .login-options {
+    align-items: flex-start;
+  }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+.login-role-button:focus-visible,
+.login-forgot:focus-visible,
+.login-need-help a:focus-visible,
+.login-special-access a:focus-visible {
+  outline: 3px solid rgba(255, 201, 40, 0.35);
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .login-role-button {
+    transition: none;
+  }
+}
+
+.login-signup-text{
+  font-size: small;
+
+}

@@ -1,0 +1,469 @@
+/* =========================================================
+   SHARETAXI OPERATOR REGISTER — blue theme, floating card, fixed viewport
+========================================================= */
+
+:root {
+  --operator-register-yellow: #ffc928;
+  --operator-register-yellow-soft: #fff3cf;
+
+  --operator-register-blue: #173b8f;
+  --operator-register-blue-dark: #0b183f;
+  --operator-register-blue-light: #eaf0ff;
+
+  --operator-register-bg: #f4f8fc;
+
+  --operator-register-text: #0b183f;
+  --operator-register-muted: #667085;
+
+  --operator-register-border: #e2e8f0;
+
+  --operator-register-danger: #dc3545;
+  --operator-register-danger-bg: #fff1f2;
+
+  --operator-register-white: #ffffff;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+.operator-register-page {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--operator-register-bg);
+  display: flex;
+  flex-direction: column;
+}
+
+.operator-register-page-header {
+  position: relative;
+  z-index: 3;
+  flex-shrink: 0;
+  padding: clamp(12px, 2vh, 28px) 48px 0;
+}
+
+/* =========================================================
+   BACKGROUND BLOBS
+========================================================= */
+
+.operator-register-blob {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.operator-register-blob-bottom {
+  left: -10%;
+  bottom: -20%;
+  width: 55%;
+  height: 78%;
+  background: var(--operator-register-blue);
+  border-radius: 58% 42% 44% 56% / 52% 46% 54% 48%;
+  opacity: 0.06;
+}
+
+.operator-register-blob-top {
+  top: -8%;
+  right: 4%;
+  width: 18%;
+  height: 24%;
+  background: var(--operator-register-yellow-soft);
+  border-radius: 40% 60% 55% 45% / 45% 55% 45% 55%;
+  opacity: 0.8;
+}
+
+/* =========================================================
+   CONTENT LAYOUT
+========================================================= */
+
+.operator-register-content {
+  position: relative;
+  z-index: 2;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(24px, 5vw, 80px);
+  padding: clamp(8px, 1.5vh, 24px) 48px;
+}
+
+/* =========================================================
+   LEFT — TEXT INTRO + PERKS
+========================================================= */
+
+.operator-register-intro {
+  flex: 1 1 380px;
+  max-width: 440px;
+  max-height: 100%;
+  overflow: hidden;
+}
+
+.operator-register-intro-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border: 1px solid rgba(23, 59, 143, 0.18);
+  border-radius: 999px;
+  background: var(--operator-register-blue-light);
+  color: var(--operator-register-blue);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.9px;
+}
+
+.operator-register-intro-badge span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--operator-register-blue);
+  box-shadow: 0 0 0 4px rgba(23, 59, 143, 0.14);
+}
+
+.operator-register-intro-title {
+  margin: clamp(12px, 2vh, 20px) 0 0;
+  color: var(--operator-register-blue-dark);
+  font-size: clamp(24px, 2.8vw, 38px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.8px;
+}
+
+.operator-register-intro-title span {
+  color: var(--operator-register-blue);
+}
+
+.operator-register-intro-text {
+  max-width: 380px;
+  margin: clamp(10px, 1.6vh, 16px) 0 0;
+  color: var(--operator-register-muted);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+/* =========================================================
+   PERKS
+========================================================= */
+
+.operator-register-perks {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 1.4vh, 15px);
+  padding: 0;
+  margin: clamp(16px, 2.6vh, 28px) 0 0;
+  list-style: none;
+}
+
+.operator-register-perks li {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  color: var(--operator-register-text);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.operator-register-perk-icon {
+  display: flex;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--operator-register-blue-light);
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(11, 24, 63, 0.06);
+}
+
+.operator-register-perk-icon svg {
+  width: 17px;
+  height: 17px;
+  color: var(--operator-register-blue);
+}
+
+/* =========================================================
+   RIGHT PANEL
+========================================================= */
+
+.operator-register-form-panel {
+  flex: 1 1 420px;
+  max-width: 560px;
+  max-height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.operator-register-form-container {
+  width: 100%;
+  max-width: 560px;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.operator-register-mobile-logo {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.operator-register-card {
+  padding: clamp(18px, 2.6vh, 34px);
+  border: 1px solid var(--operator-register-blue-light);
+  
+  background: #ffffff;
+  box-shadow:
+    0 30px 60px rgba(11, 24, 63, 0.12),
+    0 8px 20px rgba(11, 24, 63, 0.05);
+  overflow-y: auto;
+  max-height: 100%;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.operator-register-header {
+  margin-bottom: clamp(14px, 2vh, 22px);
+}
+
+.operator-register-header-label {
+  display: inline-block;
+  margin-bottom: 6px;
+  color: var(--operator-register-blue);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.operator-register-header h1 {
+  margin: 0;
+  color: var(--operator-register-blue-dark);
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.6px;
+}
+
+.operator-register-header p {
+  margin: 6px 0 0;
+  color: var(--operator-register-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.operator-register-form {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 1.6vh, 17px);
+}
+
+.operator-register-grid-two {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.operator-register-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 13px;
+  border: 1px solid #fecdd3;
+  border-radius: 10px;
+  background: var(--operator-register-danger-bg);
+  color: #be123c;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.operator-register-error-icon {
+  display: flex;
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--operator-register-danger);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+/* =========================================================
+   SUBMIT
+========================================================= */
+
+.operator-register-submit {
+  width: 100% !important;
+  min-height: 46px;
+  margin-top: 2px;
+  border-radius: 999px !important;
+  background: var(--operator-register-blue) !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  box-shadow: 0 10px 22px rgba(23, 59, 143, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.operator-register-submit:hover {
+  transform: translateY(-2px);
+  background: var(--operator-register-blue-dark) !important;
+  box-shadow: 0 14px 26px rgba(23, 59, 143, 0.38);
+}
+
+/* =========================================================
+   FOOTER LINK
+========================================================= */
+
+.operator-register-footer {
+  margin: clamp(14px, 2vh, 22px) 0 0;
+  color: var(--operator-register-muted);
+  font-size: 13px;
+  text-align: center;
+}
+
+.operator-register-footer-link {
+  color: var(--operator-register-blue);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.operator-register-footer-link:hover {
+  color: var(--operator-register-blue-dark);
+  text-decoration: underline;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+  .operator-register-content {
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .operator-register-intro {
+    text-align: center;
+    max-width: 460px;
+  }
+
+  .operator-register-intro-text {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .operator-register-perks {
+    align-items: center;
+  }
+
+  .operator-register-perks li {
+    justify-content: center;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 850px) {
+  .operator-register-page-header {
+    padding: 14px 20px 0;
+  }
+
+  .operator-register-content {
+    padding: 10px 20px 16px;
+    gap: 16px;
+  }
+
+  .operator-register-intro {
+    display: none;
+  }
+
+  .operator-register-mobile-logo {
+    display: flex;
+  }
+
+  .operator-register-card {
+    padding: 22px 20px;
+    border-radius: 20px;
+  }
+
+  .operator-register-blob-bottom {
+    left: -30%;
+    bottom: -22%;
+    width: 120%;
+    height: 55%;
+  }
+
+  .operator-register-blob-top {
+    display: none;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 560px) {
+  .operator-register-content {
+    padding: 8px 14px 12px;
+  }
+
+  .operator-register-mobile-logo {
+    margin-bottom: 16px;
+  }
+
+  .operator-register-card {
+    padding: 18px 16px;
+    border-radius: 18px;
+  }
+
+  .operator-register-header h1 {
+    font-size: 21px;
+  }
+
+  .operator-register-header p {
+    font-size: 12px;
+  }
+
+  .operator-register-grid-two {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .operator-register-form {
+    gap: 12px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .operator-register-submit {
+    transition: none;
+  }
+}

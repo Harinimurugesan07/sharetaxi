@@ -1,0 +1,203 @@
+.operator-reports-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+
+  --or-blue: #2F5CE0;
+  --or-blue-soft: #EEF2FF;
+  --or-indigo: #7C9BFF;
+  --or-indigo-soft: #EEF1FF;
+  --or-green: #22C55E;
+  --or-green-soft: #ECFDF3;
+  --or-red: #DC2626;
+  --or-red-soft: #FEF2F2;
+  --or-teal: #0D9488;
+  --or-teal-soft: #ECFDF9;
+}
+
+/* =========================================
+   Header
+   ========================================= */
+
+.operator-reports-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.operator-reports-heading {
+  margin: 0;
+  color: var(--color-navy-800);
+  font-size: 1.125rem;
+  line-height: 1.5rem;
+  font-weight: 700;
+}
+
+.operator-reports-subheading {
+  margin: 0.25rem 0 0;
+  color: var(--color-navy-500);
+  font-size: 0.8125rem;
+}
+
+/* =========================================
+   Stat cards
+   ========================================= */
+
+.operator-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 0.875rem;
+}
+
+.operator-stat-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  padding: 1rem 1.125rem;
+
+  border-radius: 0.875rem;
+  border: 1px solid var(--color-navy-50);
+
+  background: #ffffff;
+}
+
+.operator-stat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  width: 2.25rem;
+  height: 2.25rem;
+
+  border-radius: 0.625rem;
+}
+
+.operator-stat-card-blue .operator-stat-icon {
+  background: var(--or-blue-soft);
+  color: var(--or-blue);
+}
+
+.operator-stat-card-indigo .operator-stat-icon {
+  background: var(--or-indigo-soft);
+  color: var(--or-indigo);
+}
+
+.operator-stat-card-green .operator-stat-icon {
+  background: var(--or-green-soft);
+  color: var(--or-green);
+}
+
+.operator-stat-card-red .operator-stat-icon {
+  background: var(--or-red-soft);
+  color: var(--or-red);
+}
+
+.operator-stat-card-teal .operator-stat-icon {
+  background: var(--or-teal-soft);
+  color: var(--or-teal);
+}
+
+.operator-stat-body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.operator-stat-value {
+  color: var(--color-navy-800);
+  font-size: 1.375rem;
+  font-weight: 700;
+  line-height: 1.4rem;
+}
+
+.operator-stat-label {
+  color: var(--color-navy-500);
+  font-size: 0.75rem;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* =========================================
+   Charts
+   ========================================= */
+
+.operator-charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: 1rem;
+}
+
+.operator-chart-card {
+  padding: 1.5rem;
+}
+
+.operator-chart-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 260px;
+
+  color: var(--color-navy-500);
+  font-size: 0.8125rem;
+}
+
+/* =========================================
+   Totals list (existing card, kept)
+   ========================================= */
+
+.operator-reports-card {
+  padding: 1.5rem;
+}
+
+.operator-reports-title {
+  margin: 0;
+  color: var(--color-navy-800);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 700;
+}
+
+.operator-reports-list {
+  margin-top: 1rem;
+}
+
+.operator-reports-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--color-navy-50);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.operator-reports-row:last-child {
+  border-bottom: 0;
+}
+
+.operator-reports-row-label {
+  color: var(--color-navy-500);
+}
+
+.operator-reports-row-value {
+  font-weight: 700;
+  color: var(--color-navy-800);
+}
+
+/* =========================================
+   Responsive
+   ========================================= */
+
+@media (max-width: 640px) {
+  .operator-stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .operator-charts-grid {
+    grid-template-columns: 1fr;
+  }
+}

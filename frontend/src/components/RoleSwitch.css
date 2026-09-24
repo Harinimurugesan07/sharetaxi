@@ -1,0 +1,47 @@
+.role-switch {
+  display: flex;
+  width: 100%;
+  gap: 4px;
+  padding: 4px;
+  margin-bottom: 28px;
+  border-radius: 14px;
+  background: var(--color-navy-50);
+}
+
+.role-switch-option {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  gap: 7px;
+  padding: 11px 14px;
+  border: 0;
+  border-radius: 11px;
+  background: transparent;
+  color: var(--color-navy-400);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 160ms ease, color 160ms ease, box-shadow 160ms ease;
+}
+
+.role-switch-option:hover:not(.role-switch-option-active) {
+  color: var(--color-navy-600);
+}
+
+.role-switch-option-active {
+  background: var(--color-navy-800);
+  color: #ffffff;
+  box-shadow: 0 8px 18px rgba(11, 24, 63, 0.18);
+}
+
+.role-switch-icon {
+  flex: 0 0 auto;
+}
+
+@media (max-width: 420px) {
+  .role-switch-option {
+    padding: 10px 8px;
+    font-size: 12.5px;
+  }
+}

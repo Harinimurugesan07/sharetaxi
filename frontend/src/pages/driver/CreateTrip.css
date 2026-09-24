@@ -1,0 +1,769 @@
+.create-trip-page {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.create-trip-layout {
+  display: grid;
+  grid-template-columns: 270px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.create-trip-sidebar-card {
+  padding: 24px;
+  position: sticky;
+  top: 24px;
+}
+
+.create-trip-sidebar-header {
+  padding-bottom: 4px;
+}
+
+.create-trip-title {
+  margin: 0;
+  color: var(--color-navy-800);
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.create-trip-description {
+  margin: 6px 0 0;
+  color: var(--color-navy-400);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.create-trip-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 28px;
+}
+
+.create-trip-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 34px;
+}
+
+.create-trip-step-number {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 800;
+  transition: all 0.2s ease;
+}
+
+.create-trip-step-active .create-trip-step-number {
+  background: var(--color-primary);
+  color: var(--color-navy-800);
+  box-shadow: 0 0 0 5px var(--color-primary-soft);
+}
+
+.create-trip-step-completed .create-trip-step-number {
+  background: var(--color-success-500);
+  color: #fff;
+}
+
+.create-trip-step-upcoming .create-trip-step-number {
+  background: var(--color-navy-100);
+  color: var(--color-navy-400);
+}
+
+.create-trip-step-label {
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.create-trip-step-active .create-trip-step-label {
+  color: var(--color-navy-800);
+}
+
+.create-trip-step-completed .create-trip-step-label {
+  color: var(--color-navy-600);
+}
+
+.create-trip-step-upcoming .create-trip-step-label {
+  color: var(--color-navy-400);
+}
+
+/* TRIP GLANCE */
+
+.create-trip-glance {
+  margin-top: 30px;
+  padding: 16px;
+  border-radius: 14px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-navy-100);
+}
+
+.create-trip-glance-title {
+  margin: 0 0 10px;
+  color: var(--color-navy-800);
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.create-trip-glance-location {
+  margin: 0;
+  overflow: hidden;
+  color: var(--color-navy-500);
+  font-size: 13px;
+  font-weight: 550;
+  line-height: 1.5;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.create-trip-glance-arrow {
+  margin: 3px 0;
+  color: var(--color-navy-300);
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.create-trip-glance-date {
+  margin: 9px 0 0;
+  color: var(--color-navy-400);
+  font-size: 11px;
+}
+
+/* =========================================
+   MAIN CARD
+========================================= */
+
+.create-trip-content-card {
+  min-width: 0;
+  padding: 30px;
+}
+
+.create-trip-content-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 24px;
+  margin-bottom: 26px;
+  border-bottom: 1px solid var(--color-navy-100);
+}
+
+.create-trip-step-counter {
+  display: inline-block;
+  margin-bottom: 6px;
+  color: var(--color-primary-ink);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.create-trip-content-header h2 {
+  margin: 0;
+  color: var(--color-navy-800);
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+.create-trip-content-header p {
+  max-width: 550px;
+  margin: 7px 0 0;
+  color: var(--color-navy-400);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.create-trip-progress {
+  display: flex;
+  gap: 5px;
+  padding-top: 8px;
+}
+
+.create-trip-progress span {
+  width: 34px;
+  height: 5px;
+  display: block;
+  border-radius: 999px;
+  background: var(--color-navy-100);
+  transition: background 0.2s ease;
+}
+
+.create-trip-progress .create-trip-progress-active {
+  background: var(--color-primary);
+}
+
+/* =========================================
+   FORM
+========================================= */
+
+.create-trip-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.create-trip-two-column {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* =========================================
+   STOPS
+========================================= */
+
+.create-trip-stop-input {
+  display: flex;
+  gap: 10px;
+}
+
+.create-trip-stop-input > :first-child {
+  flex: 1;
+  min-width: 0;
+}
+
+.create-trip-stop-input button {
+  width: 46px;
+  flex: 0 0 46px;
+}
+
+.create-trip-stop-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.create-trip-stop-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 46px;
+  padding: 8px 10px 8px 12px;
+  border: 1px solid var(--color-navy-100);
+  border-radius: 11px;
+  background: var(--color-bg);
+  color: var(--color-navy-700);
+  font-size: 13px;
+}
+
+.create-trip-stop-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.create-trip-stop-info > span:last-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.create-trip-stop-number {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--color-primary-soft);
+  color: var(--color-primary-ink);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.create-trip-remove-stop {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-navy-300);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.create-trip-remove-stop:hover {
+  background: var(--color-danger-50);
+  color: var(--color-danger-500);
+}
+
+.create-trip-route-preview {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 17px;
+  border: 1px solid var(--color-navy-100);
+  border-radius: 14px;
+  background: linear-gradient(
+    135deg,
+    var(--color-bg),
+    #fff
+  );
+}
+
+.create-trip-route-icon {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 11px;
+  background: var(--color-primary-soft);
+  color: var(--color-primary-ink);
+}
+
+.create-trip-route-label {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--color-navy-400);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.create-trip-route-preview p {
+  margin: 0;
+  color: var(--color-navy-700);
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.5;
+}
+
+.create-trip-route-arrow {
+  margin: 0 7px;
+  color: var(--color-navy-300);
+}
+
+/* =========================================
+   VEHICLE
+========================================= */
+
+.create-trip-field-error {
+  margin: 5px 0 0;
+  color: var(--color-danger-500);
+  font-size: 12px;
+}
+
+.create-trip-selected-vehicle {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 14px;
+  border: 1px solid var(--color-navy-100);
+  border-radius: 13px;
+  background: var(--color-bg);
+}
+
+.create-trip-vehicle-icon {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: var(--color-primary-soft);
+  color: var(--color-primary-ink);
+}
+
+.create-trip-selected-vehicle p {
+  margin: 0;
+  color: var(--color-navy-800);
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.create-trip-selected-vehicle span {
+  display: block;
+  margin-top: 3px;
+  color: var(--color-navy-400);
+  font-size: 12px;
+}
+
+.create-trip-info-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 15px;
+  border: 1px solid var(--color-primary-soft);
+  border-radius: 13px;
+  background: #fffaf0;
+  color: var(--color-primary-ink);
+}
+
+.create-trip-info-box svg {
+  margin-top: 1px;
+  flex: 0 0 auto;
+}
+
+.create-trip-info-box strong {
+  display: block;
+  color: var(--color-navy-800);
+  font-size: 13px;
+}
+
+.create-trip-info-box p {
+  margin: 3px 0 0;
+  color: var(--color-navy-400);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* =========================================
+   REVIEW
+========================================= */
+
+.create-trip-review {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.create-trip-review-route {
+  padding: 20px;
+  border: 1px solid var(--color-navy-100);
+  border-radius: 15px;
+  background: var(--color-bg);
+}
+
+.create-trip-review-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 19px;
+  color: var(--color-navy-800);
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.create-trip-review-heading svg {
+  color: var(--color-primary-ink);
+}
+
+.create-trip-review-route-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+  padding-left: 4px;
+}
+
+.create-trip-review-route-content::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: 10px;
+  width: 1px;
+  background: var(--color-navy-200);
+}
+
+.create-trip-review-location {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.create-trip-review-dot {
+  width: 13px;
+  height: 13px;
+  flex: 0 0 13px;
+  margin-top: 3px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 1px var(--color-navy-200);
+  z-index: 1;
+}
+
+.create-trip-review-dot.pickup {
+  background: var(--color-success-500);
+}
+
+.create-trip-review-dot.stop {
+  background: var(--color-primary);
+}
+
+.create-trip-review-dot.destination {
+  background: var(--color-danger-500);
+}
+
+.create-trip-review-location small {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--color-navy-400);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.create-trip-review-location strong {
+  display: block;
+  color: var(--color-navy-800);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.create-trip-review-stops {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.create-trip-review-time {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid var(--color-navy-100);
+  color: var(--color-navy-600);
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.create-trip-review-time svg {
+  color: var(--color-primary-ink);
+}
+
+/* REVIEW CARDS */
+
+.create-trip-review-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.create-trip-review-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px;
+  border: 1px solid var(--color-navy-100);
+  border-radius: 13px;
+  background: #fff;
+}
+
+.create-trip-review-fare {
+  grid-column: 1 / -1;
+}
+
+.create-trip-review-card-icon {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: var(--color-primary-soft);
+  color: var(--color-primary-ink);
+}
+
+.create-trip-review-card span {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--color-navy-400);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.create-trip-review-card strong {
+  display: block;
+  color: var(--color-navy-800);
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.create-trip-review-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 12px;
+  background: var(--color-primary-soft);
+  color: var(--color-navy-700);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.create-trip-review-notice svg {
+  flex: 0 0 auto;
+  margin-top: 1px;
+  color: var(--color-primary-ink);
+}
+
+/* =========================================
+   ACTIONS
+========================================= */
+
+.create-trip-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 30px;
+  padding-top: 22px;
+  border-top: 1px solid var(--color-navy-100);
+}
+
+.create-trip-action-button {
+  min-width: 130px;
+}
+
+.create-trip-next-button {
+  margin-left: auto;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+  .create-trip-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .create-trip-sidebar-card {
+    position: static;
+  }
+
+  .create-trip-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+
+  .create-trip-step {
+    flex-direction: column;
+    gap: 7px;
+    text-align: center;
+  }
+
+  .create-trip-step-label {
+    font-size: 11px;
+  }
+
+  .create-trip-glance {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .create-trip-content-card {
+    padding: 20px;
+  }
+
+  .create-trip-sidebar-card {
+    padding: 18px;
+  }
+
+  .create-trip-content-header {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .create-trip-progress {
+    width: 100%;
+  }
+
+  .create-trip-progress span {
+    flex: 1;
+    width: auto;
+  }
+
+  .create-trip-content-header h2 {
+    font-size: 21px;
+  }
+
+  .create-trip-two-column {
+    grid-template-columns: 1fr;
+  }
+
+  .create-trip-review-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .create-trip-review-fare {
+    grid-column: auto;
+  }
+
+  .create-trip-actions {
+    position: sticky;
+    bottom: 0;
+    z-index: 5;
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-bottom: -20px;
+    padding: 14px 20px;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(10px);
+  }
+
+  .create-trip-action-button {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .create-trip-route-preview {
+    align-items: flex-start;
+  }
+
+  .create-trip-route-preview p {
+    line-height: 1.7;
+  }
+}
+
+@media (max-width: 430px) {
+  .create-trip-steps {
+    gap: 3px;
+  }
+
+  .create-trip-step-label {
+    font-size: 10px;
+  }
+
+  .create-trip-step-number {
+    width: 30px;
+    height: 30px;
+    flex-basis: 30px;
+  }
+
+  .create-trip-content-card {
+    padding: 16px;
+  }
+
+  .create-trip-actions {
+    margin-left: -16px;
+    margin-right: -16px;
+    margin-bottom: -16px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}

@@ -1,0 +1,100 @@
+/* =========================================
+   Badge
+   ========================================= */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+
+  padding: 0.25rem 0.625rem;
+
+  border-radius: 9999px;
+
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+/* =========================================
+   Yellow
+   ========================================= */
+
+.badge-yellow {
+  background-color: var(--color-primary-soft);
+  color: var(--color-navy-700);
+}
+
+/* =========================================
+   Navy
+   ========================================= */
+
+.badge-navy {
+  background-color: var(--color-navy-100);
+  color: var(--color-navy-700);
+}
+
+/* =========================================
+   Success
+   ========================================= */
+
+.badge-success {
+  background-color: var(--color-success-50);
+  color: var(--color-success-600);
+}
+
+/* =========================================
+   Danger
+   ========================================= */
+
+.badge-danger {
+  background-color: var(--color-danger-50);
+  color: var(--color-danger-600);
+}
+
+/* =========================================
+   Neutral
+   ========================================= */
+
+.badge-neutral {
+  background-color: var(--color-navy-50);
+  color: var(--color-navy-400);
+}
+
+/* =========================================
+   Optional visual states
+   ========================================= */
+
+.badge:focus-visible {
+  outline: 2px solid var(--color-navy-400);
+  outline-offset: 2px;
+}
+
+/* =========================================
+   Responsive
+   ========================================= */
+
+@media (max-width: 480px) {
+  .badge {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.6875rem;
+    line-height: 0.9375rem;
+  }
+}
+
+/* =========================================
+   Reduced Motion
+   ========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .badge {
+    transition: none;
+  }
+}

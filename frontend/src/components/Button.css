@@ -1,0 +1,325 @@
+/* =========================================
+   SHARETAXI BUTTON SYSTEM
+========================================= */
+
+.app-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  border: 1px solid transparent;
+  border-radius: 12px;
+
+  font-family: inherit;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+
+  cursor: pointer;
+  user-select: none;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.15s ease;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* =========================================
+   SIZES
+========================================= */
+
+.app-button-sm {
+  min-height: 38px;
+  padding: 8px 14px;
+  font-size: 13px;
+}
+
+.app-button-md {
+  min-height: 44px;
+  padding: 10px 20px;
+  font-size: 14px;
+}
+
+.app-button-lg {
+  min-height: 52px;
+  padding: 14px 24px;
+  font-size: 16px;
+}
+
+/* =========================================
+   PRIMARY
+   Yellow CTA
+========================================= */
+
+.app-button-primary {
+  background: var(--color-primary);
+  color: var(--color-navy-800);
+  border-radius: 18px 6px 18px 6px;
+  box-shadow: 0 4px 10px rgba(255, 201, 40, 0.18);
+}
+
+.app-button-primary:hover:not(:disabled) {
+  background: var(--color-primary-strong);
+
+  box-shadow:
+    0 6px 16px rgba(255, 201, 40, 0.28);
+
+  transform: translateY(-1px);
+}
+
+.app-button-primary:active:not(:disabled) {
+  background: var(--color-primary-strong);
+  transform: translateY(0);
+}
+
+/* =========================================
+   SECONDARY
+   Navy CTA
+========================================= */
+
+.app-button-secondary {
+  background: var(--color-navy-700);
+  color: #ffffff;
+      border-radius: 18px 6px 18px 6px;
+
+  box-shadow:
+    0 4px 10px rgba(20, 43, 103, 0.15);
+}
+
+.app-button-secondary:hover:not(:disabled) {
+  background: var(--color-navy-800);
+
+  box-shadow:
+    0 6px 16px rgba(20, 43, 103, 0.24);
+
+  transform: translateY(-1px);
+}
+
+.app-button-secondary:active:not(:disabled) {
+  background: var(--color-navy-900);
+  transform: translateY(0);
+}
+
+/* =========================================
+   OUTLINE
+========================================= */
+
+.app-button-outline {
+  background: #ffffff;
+  color: var(--color-navy-700);
+
+  border-color: var(--color-navy-200);
+}
+
+.app-button-outline:hover:not(:disabled) {
+  background: var(--color-navy-50);
+  border-color: var(--color-navy-300);
+
+  transform: translateY(-1px);
+}
+
+.app-button-outline:active:not(:disabled) {
+  background: var(--color-navy-100);
+  transform: translateY(0);
+}
+
+/* =========================================
+   GHOST
+========================================= */
+
+.app-button-ghost {
+  background: transparent;
+  color: var(--color-navy-600);
+  border-color: transparent;
+}
+
+.app-button-ghost:hover:not(:disabled) {
+  background: var(--color-navy-50);
+  color: var(--color-navy-700);
+}
+
+.app-button-ghost:active:not(:disabled) {
+  background: var(--color-navy-100);
+}
+
+/* =========================================
+   DANGER
+========================================= */
+
+.app-button-danger {
+  background: #7cada6;
+  color: #000;
+
+  box-shadow:
+    0 4px 10px rgba(220, 38, 38, 0.14);
+}
+
+.app-button-danger:hover:not(:disabled) {
+  background: var(--color-danger-600);
+
+  box-shadow:
+    0 6px 16px rgba(220, 38, 38, 0.22);
+
+  transform: translateY(-1px);
+}
+
+.app-button-danger:active:not(:disabled) {
+  background: var(--color-danger-600);
+  transform: translateY(0);
+}
+
+/* =========================================
+   SUBTLE DANGER
+========================================= */
+
+.app-button-subtleDanger {
+  background: var(--color-danger-50);
+  color: var(--color-danger-600);
+  border-color: transparent;
+}
+
+.app-button-subtleDanger:hover:not(:disabled) {
+  background: rgba(254, 226, 226, 0.8);
+  color: var(--color-danger-600);
+}
+
+.app-button-subtleDanger:active:not(:disabled) {
+  background: var(--color-danger-50);
+}
+
+/* =========================================
+   SUBTLE SUCCESS
+========================================= */
+
+.app-button-subtleSuccess {
+  background: var(--color-success-50);
+  color: var(--color-success-600);
+  border-color: transparent;
+}
+
+.app-button-subtleSuccess:hover:not(:disabled) {
+  background: rgba(220, 252, 231, 0.8);
+  color: var(--color-success-600);
+}
+
+.app-button-subtleSuccess:active:not(:disabled) {
+  background: var(--color-success-50);
+}
+
+/* =========================================
+   DISABLED
+========================================= */
+
+.app-button:disabled,
+.app-button[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+
+  box-shadow: none;
+  transform: none;
+}
+
+/* =========================================
+   LOADING
+========================================= */
+
+.app-button-loading {
+  cursor: wait;
+}
+
+.app-button-spinner {
+  width: 16px;
+  height: 16px;
+
+  flex: 0 0 16px;
+
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+
+  animation: app-button-spin 0.7s linear infinite;
+}
+
+@keyframes app-button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================
+   FOCUS
+========================================= */
+
+.app-button:focus-visible {
+  outline: 3px solid rgba(255, 201, 40, 0.45);
+  outline-offset: 2px;
+}
+
+/* =========================================
+   ICONS INSIDE BUTTONS
+========================================= */
+
+.app-button svg {
+  width: 18px;
+  height: 18px;
+
+  flex: 0 0 auto;
+}
+
+.app-button-sm svg {
+  width: 16px;
+  height: 16px;
+}
+
+.app-button-lg svg {
+  width: 19px;
+  height: 19px;
+}
+
+/* =========================================
+   LINK BUTTON NORMALIZATION
+========================================= */
+
+a.app-button {
+  text-decoration: none;
+}
+
+a.app-button:hover {
+  text-decoration: none;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+  .app-button-lg {
+    min-height: 48px;
+    padding: 12px 20px;
+    font-size: 15px;
+  }
+
+  .app-button-md {
+    min-height: 42px;
+    padding: 9px 16px;
+  }
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .app-button,
+  .app-button-spinner {
+    transition: none;
+    animation: none;
+  }
+}
