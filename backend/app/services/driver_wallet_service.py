@@ -209,14 +209,15 @@ def request_payout(driver, amount):
     wallet.available_balance -= amount
 
     payout_request = DriverPayoutRequest(
-        driver_id=driver.id,
-        amount=amount,
-        status="pending",
-        bank_account_holder_name=driver.bank_account_holder_name,
-        bank_name=driver.bank_name,
-        bank_account_number=driver.bank_account_number,
-        bank_ifsc_code=driver.bank_ifsc_code,
-    )
+    driver_id=driver.id,
+    operator_id=driver.operator_id,
+    amount=amount,
+    status="pending",
+    bank_account_holder_name=driver.bank_account_holder_name,
+    bank_name=driver.bank_name,
+    bank_account_number=driver.bank_account_number,
+    bank_ifsc_code=driver.bank_ifsc_code,
+)
 
     db.session.add(payout_request)
 

@@ -24,13 +24,22 @@ class DriverPayoutRequest(db.Model, TimestampMixin):
         index=True,
     )
 
+    # Snapshot of the operator who should handle this payout.
+    # NULL = freelance driver payout -> Admin handles it.
+    operator_id = db.Column(
+        db.Integer,
+        db.ForeignKey("users.id"),
+        nullable=True,
+        index=True,
+    )
+
     amount = db.Column(
         db.Numeric(12, 2),
         nullable=False,
     )
 
     status = db.Column(
-        db.String(20),
+        db.String(30),
         nullable=False,
         default="pending",
         index=True,
@@ -76,7 +85,17 @@ class DriverPayoutRequest(db.Model, TimestampMixin):
         nullable=True,
     )
 
+    operator_note = db.Column(
+        db.String(500),
+        nullable=True,
+    )
+
     processed_at = db.Column(
+        db.DateTime,
+        nullable=True,
+    )
+
+    operator_processed_at = db.Column(
         db.DateTime,
         nullable=True,
     )
@@ -86,23 +105,50 @@ class DriverPayoutRequest(db.Model, TimestampMixin):
         foreign_keys=[driver_id],
     )
 
+    operator = db.relationship(
+        "User",
+        foreign_keys=[operator_id],
+    )
+
     def to_dict(self):
         return {
             "id": self.public_id,
+
             "driver_id": (
                 self.driver.public_id
                 if self.driver
                 else None
             ),
+
             "driver_name": (
                 self.driver.user.full_name
                 if self.driver
                 and self.driver.user
                 else None
             ),
+
+            "driver_type": (
+                "operator"
+                if self.operator_id is not None
+                else "freelance"
+            ),
+
+            "operator_id": (
+                self.operator.public_id
+                if self.operator
+                else None
+            ),
+
+            "operator_name": (
+                self.operator.full_name
+                if self.operator
+                else None
+            ),
+
             "amount": float(
                 self.amount or Decimal("0.00")
             ),
+
             "status": self.status,
 
             "bank_account_holder_name": (
@@ -128,9 +174,17 @@ class DriverPayoutRequest(db.Model, TimestampMixin):
 
             "admin_note": self.admin_note,
 
+            "operator_note": self.operator_note,
+
             "processed_at": (
                 self.processed_at.isoformat()
                 if self.processed_at
+                else None
+            ),
+
+            "operator_processed_at": (
+                self.operator_processed_at.isoformat()
+                if self.operator_processed_at
                 else None
             ),
 
