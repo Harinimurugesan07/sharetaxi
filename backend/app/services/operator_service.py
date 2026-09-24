@@ -16,6 +16,7 @@ from app.services.onboarding_service import submit_document
 from app.extensions import db
 from app.utils.validators import is_valid_license_number, is_valid_registration_number
 from app.models.vehicle_expense import VehicleExpense
+from app.models.driver_payout_request import DriverPayoutRequest
 
 class OperatorServiceError(Exception):
     def __init__(self, message, status_code=400):
@@ -719,3 +720,24 @@ def operator_vehicles(operator_id):
     )
 
     return vehicles
+
+
+
+
+def list_driver_payout_requests(operator_id, status=None):
+    query = DriverPayoutRequest.query.filter_by(
+        operator_id=operator_id
+    )
+
+    if status:
+        query = query.filter_by(
+            status=status.strip().lower()
+        )
+
+    return (
+        query
+        .order_by(
+            DriverPayoutRequest.created_at.desc()
+        )
+        .all()
+    )

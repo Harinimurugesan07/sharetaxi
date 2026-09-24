@@ -371,12 +371,14 @@ def get_driver_payout_requests(status=None):
         paid
     """
 
-    query = DriverPayoutRequest.query
+    query = DriverPayoutRequest.query.filter(
+    DriverPayoutRequest.operator_id.is_(None)
+)
 
     if status:
-        query = query.filter_by(
-            status=status.strip().lower()
-        )
+       query = query.filter_by(
+          status=status.strip().lower()
+    )
 
     return (
         query
