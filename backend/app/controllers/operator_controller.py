@@ -7,6 +7,8 @@ from app.middleware.auth_middleware import (
 )
 from app.services import operator_service, operator_wallet_service
 from app.services.operator_service import OperatorServiceError
+from app.models.driver_payout_request import DriverPayoutRequest
+from app.models.user import User
 from app.utils.constants import UserRole
 from app.utils.response import error_response, success_response
 
@@ -391,4 +393,49 @@ def wallet():
             transaction.to_dict()
             for transaction in operator_wallet_service.get_transactions(operator)
         ],
+        "payouts": [
+            payout.to_dict()
+            for payout in DriverPayoutRequest.query.filter_by(
+                operator_id=operator.id
+            ).order_by(DriverPayoutRequest.created_at.desc()).all()
+        ],
     })
+
+
+@role_required(UserRole.OPERATOR)
+@verified_subscribed_required
+def request_wallet_payout():
+    operator = User.query.get(int(get_jwt_identity()))
+    try:
+        payout_request, wallet, transaction = operator_wallet_service.request_payout(
+            operator, (request.get_json(silent=True) or {}).get("amount")
+        )
+    except operator_wallet_service.OperatorWalletServiceError as error:
+        return _handle_error(error)
+    return success_response({
+        "payout_request": payout_request.to_dict(),
+        "wallet": wallet.to_dict(),
+        "transaction": transaction.to_dict(),
+    }, message="Payout request submitted", status_code=201)
+
+
+@role_required(UserRole.OPERATOR)
+@verified_subscribed_required
+def withdraw_wallet_payout(payout_request_id):
+    operator = User.query.get(int(get_jwt_identity()))
+    payout_request = DriverPayoutRequest.query.filter_by(
+        public_id=payout_request_id, operator_id=operator.id, driver_id=None
+    ).first()
+    if not payout_request:
+        return error_response("Payout request not found", 404)
+    try:
+        payout_request, wallet, transaction = operator_wallet_service.complete_payout(
+            operator, payout_request
+        )
+    except operator_wallet_service.OperatorWalletServiceError as error:
+        return _handle_error(error)
+    return success_response({
+        "payout_request": payout_request.to_dict(),
+        "wallet": wallet.to_dict(),
+        "transaction": transaction.to_dict(),
+    }, message="Payout withdrawn")

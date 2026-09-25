@@ -240,7 +240,7 @@ export default function PayoutRequests() {
                 return (
                   <tr key={item.id}>
                     <td>
-                      {item.operator_id ? "Operator driver" : "Freelance driver"}
+                      {item.driver_type === "operator_wallet" ? "Operator" : item.operator_id ? "Operator driver" : "Freelance driver"}
                     </td>
                     <td>{item.operator_name || "Admin-managed"}</td>
                     <td>
@@ -323,7 +323,7 @@ export default function PayoutRequests() {
                           </>
                         )}
 
-                        {item.status === "approved" && (
+                        {item.status === "approved" && item.driver_type === "freelance" && (
                           <button
                             type="button"
                             className="admin-payout-approve"

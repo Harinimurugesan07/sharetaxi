@@ -10,7 +10,7 @@ const nav = [
   { to: "/driver/trips", label: "My Trips", icon: Route },
   { to: "/driver/requests", label: "Bookings", icon: Inbox },
   { to: "/driver/vehicles", label: "Vehicles", icon: Car },
-  { to: "/driver/earnings", label: "Earnings", icon: Wallet },
+  { to: "/driver/earnings", label: "Wallet & Payout", icon: Wallet },
   { to: "/driver/profile", label: "Profile", icon: User },
   { to: "/driver/settings/subscription", label: "Subscription", icon: CreditCard },
 ];

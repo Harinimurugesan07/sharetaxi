@@ -55,6 +55,12 @@ export const operatorVehicles = () =>
 export const operatorWallet = () =>
   request({ method: "GET", url: "/operator/wallet" });
 
+export const requestOperatorPayout = (amount) =>
+  request({ method: "POST", url: "/operator/wallet/payout", data: { amount } });
+
+export const withdrawOperatorPayout = (payoutRequestId) =>
+  request({ method: "POST", url: `/operator/wallet/payout/${payoutRequestId}/withdraw` });
+
 export const operatorFinancialSummary = () =>
   request({ method: "GET", url: "/operator/financial-summary" });
 

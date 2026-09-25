@@ -20,6 +20,7 @@ from app.services import driver_wallet_service
 from app.services.driver_wallet_service import DriverWalletServiceError
 
 from app.models.driver import Driver
+from app.models.driver_payout_request import DriverPayoutRequest
 
 
 @role_required(UserRole.DRIVER)
@@ -321,3 +322,36 @@ def request_payout():
         message="Payout request submitted",
         status_code=201,
     )
+
+
+@role_required(UserRole.DRIVER)
+def payout_requests():
+    driver = Driver.query.filter_by(user_id=int(get_jwt_identity())).first()
+    if not driver:
+        return error_response("Driver profile not found", 404)
+    return success_response([
+        item.to_dict()
+        for item in DriverPayoutRequest.query.filter_by(driver_id=driver.id)
+        .order_by(DriverPayoutRequest.created_at.desc()).all()
+    ])
+
+
+@role_required(UserRole.DRIVER)
+def withdraw_payout(payout_request_id):
+    driver = Driver.query.filter_by(user_id=int(get_jwt_identity())).first()
+    payout_request = DriverPayoutRequest.query.filter_by(
+        public_id=payout_request_id, driver_id=driver.id
+    ).first() if driver else None
+    if not payout_request:
+        return error_response("Payout request not found", 404)
+    try:
+        payout_request, wallet, transaction = driver_wallet_service.complete_payout(
+            driver, payout_request
+        )
+    except DriverWalletServiceError as error:
+        return error_response(error.message, error.status_code)
+    return success_response({
+        "payout_request": payout_request.to_dict(),
+        "wallet": wallet.to_dict(),
+        "transaction": transaction.to_dict(),
+    }, message="Payout withdrawn")

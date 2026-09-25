@@ -20,6 +20,8 @@ from app.models.driver_payout_request import DriverPayoutRequest
 from app.services import razorpayx_service
 from app.models.driver_wallet import DriverWallet
 from app.models.driver_wallet_transaction import DriverWalletTransaction
+from app.models.operator_wallet import OperatorWallet
+from app.models.operator_wallet_transaction import OperatorWalletTransaction
 
 class AdminServiceError(Exception):
     def __init__(self, message, status_code=400):
@@ -677,14 +679,14 @@ def reject_driver_payout_request(
             "Only pending payout requests can be rejected"
         )
 
-    wallet = (
-        DriverWallet.query
-        .filter_by(
+    if payout_request.driver_id is None:
+        wallet = OperatorWallet.query.filter_by(
+            operator_id=payout_request.operator_id
+        ).with_for_update().first()
+    else:
+        wallet = DriverWallet.query.filter_by(
             driver_id=payout_request.driver_id
-        )
-        .with_for_update()
-        .first()
-    )
+        ).with_for_update().first()
 
     if not wallet:
         raise ValueError(
@@ -703,16 +705,28 @@ def reject_driver_payout_request(
     )
     payout_request.processed_at = datetime.utcnow()
 
-    transaction = DriverWalletTransaction(
-        wallet_id=wallet.id,
-        driver_id=payout_request.driver_id,
-        transaction_type="PAYOUT_RELEASE",
-        amount=amount,
-        balance_after=wallet.available_balance,
-        reference=payout_request.public_id,
-        description="Rejected payout amount released",
-        status="completed",
-    )
+    if payout_request.driver_id is None:
+        transaction = OperatorWalletTransaction(
+            wallet_id=wallet.id,
+            operator_id=payout_request.operator_id,
+            transaction_type="PAYOUT_RELEASE",
+            amount=amount,
+            balance_after=wallet.available_balance,
+            reference=payout_request.public_id,
+            description="Rejected payout amount released",
+            status="completed",
+        )
+    else:
+        transaction = DriverWalletTransaction(
+            wallet_id=wallet.id,
+            driver_id=payout_request.driver_id,
+            transaction_type="PAYOUT_RELEASE",
+            amount=amount,
+            balance_after=wallet.available_balance,
+            reference=payout_request.public_id,
+            description="Rejected payout amount released",
+            status="completed",
+        )
 
     db.session.add(transaction)
 

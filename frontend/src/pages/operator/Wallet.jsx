@@ -17,12 +17,16 @@ import {
 import { formatCurrency, formatDateTime } from "../../lib/format";
 
 import { operatorWallet } from "../../api/operator";
+import { requestOperatorPayout, withdrawOperatorPayout } from "../../api/operator";
 
 import "./Wallet.css";
 
 export default function Wallet() {
   const [walletData, setWalletData] = useState(null);
   const [status, setStatus] = useState("loading");
+  const [amount, setAmount] = useState("");
+  const [message, setMessage] = useState("");
+  const [actionId, setActionId] = useState(null);
 
   const load = () => {
     setStatus("loading");
@@ -36,6 +40,32 @@ export default function Wallet() {
         console.error("Failed to load operator wallet:", error);
         setStatus("error");
       });
+  };
+
+  const requestPayout = async () => {
+    setMessage("");
+    try {
+      await requestOperatorPayout(Number(amount));
+      setAmount("");
+      setMessage("Payout request sent to Admin for approval.");
+      load();
+    } catch (error) {
+      setMessage(error?.response?.data?.message || error?.message || "Unable to request payout.");
+    }
+  };
+
+  const withdraw = async (id) => {
+    setActionId(id);
+    setMessage("");
+    try {
+      await withdrawOperatorPayout(id);
+      setMessage("Approved payout withdrawn successfully.");
+      load();
+    } catch (error) {
+      setMessage(error?.response?.data?.message || error?.message || "Unable to withdraw payout.");
+    } finally {
+      setActionId(null);
+    }
   };
 
   useEffect(() => {
@@ -104,6 +134,42 @@ export default function Wallet() {
           </div>
         </Card>
       </div>
+
+      <Card className="wallet-card">
+        <div className="wallet-card-header">
+          <div>
+            <p className="wallet-card-title">Payout / Withdraw</p>
+            <p className="wallet-card-subtitle">Requests are reviewed by Admin before withdrawal.</p>
+          </div>
+        </div>
+        <div className="payout-input-row">
+          <span className="payout-currency">₹</span>
+          <input type="number" min="1" step="0.01" value={amount} onChange={(event) => setAmount(event.target.value)} placeholder="Enter amount" />
+          <button type="button" className="payout-submit-button" onClick={requestPayout} disabled={!amount || Number(amount) <= 0 || Number(amount) > Number(wallet.available_balance || 0)}>
+            Request Payout
+          </button>
+        </div>
+        {message && <p className="payout-message">{message}</p>}
+      </Card>
+
+      <Card className="wallet-card">
+        <div className="wallet-card-header">
+          <div>
+            <p className="wallet-card-title">Payout Requests</p>
+            <p className="wallet-card-subtitle">Track approval and withdrawal status.</p>
+          </div>
+        </div>
+        {(walletData?.payouts || []).map((payout) => (
+          <div className="wallet-payout-row" key={payout.id}>
+            <span>{formatCurrency(payout.amount)} · {payout.status}</span>
+            {payout.status === "approved" && (
+              <button type="button" className="payout-submit-button" disabled={actionId === payout.id} onClick={() => withdraw(payout.id)}>
+                {actionId === payout.id ? "Withdrawing..." : "Withdraw"}
+              </button>
+            )}
+          </div>
+        ))}
+      </Card>
 
       <Card className="wallet-card">
         <div className="wallet-card-header">

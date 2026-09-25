@@ -1,3 +1,4 @@
+from datetime import datetime
 from decimal import Decimal, InvalidOperation
 
 from app.extensions import db
@@ -139,7 +140,7 @@ def request_payout(driver, amount):
         )
 
     # Bank payout details must be configured first.
-    if driver.payout_method != "bank":
+    if driver.operator_id is None and driver.payout_method != "bank":
         raise DriverWalletServiceError(
             "Please configure your bank payout method first",
             422,
@@ -158,7 +159,7 @@ def request_payout(driver, amount):
         if not value
     ]
 
-    if missing:
+    if missing and driver.operator_id is None:
         raise DriverWalletServiceError(
             "Please complete your bank payout details first",
             422,
@@ -213,10 +214,10 @@ def request_payout(driver, amount):
     operator_id=driver.operator_id,
     amount=amount,
     status="pending",
-    bank_account_holder_name=driver.bank_account_holder_name,
-    bank_name=driver.bank_name,
-    bank_account_number=driver.bank_account_number,
-    bank_ifsc_code=driver.bank_ifsc_code,
+    bank_account_holder_name=driver.bank_account_holder_name or driver.user.full_name,
+    bank_name=driver.bank_name or "Manual approval",
+    bank_account_number=driver.bank_account_number or "N/A",
+    bank_ifsc_code=driver.bank_ifsc_code or "N/A",
 )
 
     db.session.add(payout_request)
@@ -241,6 +242,30 @@ def request_payout(driver, amount):
 
     db.session.commit()
 
+    return payout_request, wallet, transaction
+
+
+def complete_payout(driver, payout_request):
+    if payout_request.status != "approved":
+        raise DriverWalletServiceError("Only approved payouts can be withdrawn", 409)
+    wallet = DriverWallet.query.filter_by(driver_id=driver.id).with_for_update().first()
+    if not wallet:
+        raise DriverWalletServiceError("Driver wallet not found", 404)
+    payout_request.status = "paid"
+    payout_request.processed_at = datetime.utcnow()
+    wallet.total_withdrawn += payout_request.amount
+    transaction = DriverWalletTransaction(
+        wallet_id=wallet.id,
+        driver_id=driver.id,
+        transaction_type="PAYOUT_COMPLETED",
+        amount=-payout_request.amount,
+        balance_after=wallet.available_balance,
+        reference=payout_request.public_id,
+        description="Payout withdrawn",
+        status="completed",
+    )
+    db.session.add(transaction)
+    db.session.commit()
     return payout_request, wallet, transaction
 
 

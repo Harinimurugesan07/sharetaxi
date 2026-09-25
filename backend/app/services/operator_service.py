@@ -189,8 +189,8 @@ def dashboard_stats(operator_id):
 
 
 def list_live_trips(operator_id):
-    return _operator_trips(operator_id).filter_by(
-        status=TripStatus.ONGOING,
+    return _operator_trips(operator_id).filter(
+        Trip.status == TripStatus.ONGOING,
     ).order_by(Trip.started_at.desc()).all()
 
 

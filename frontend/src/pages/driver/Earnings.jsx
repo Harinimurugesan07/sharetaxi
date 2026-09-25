@@ -49,6 +49,8 @@ import { isOperatorOwnedDriver } from "../../lib/driverType";
 import {
   getDriverWallet,
   getDriverWalletTransactions,
+  getDriverPayoutRequests,
+  withdrawDriverPayout,
 } from "../../api/driverWallet";
 
 import "./Earnings.css";
@@ -161,6 +163,8 @@ export default function Earnings() {
 
   const [walletTransactions, setWalletTransactions] =
     useState([]);
+  const [payoutRequests, setPayoutRequests] = useState([]);
+  const [withdrawId, setWithdrawId] = useState(null);
 
   // Payout request
   const [payoutAmount, setPayoutAmount] =
@@ -210,10 +214,12 @@ export default function Earnings() {
 
           setSettlementData(settlement);
 
-          // Operator drivers don't use
-          // freelance wallet.
-          setWallet(null);
-          setWalletTransactions([]);
+          const [w, wt, payouts] = await Promise.all([
+            getDriverWallet(), getDriverWalletTransactions(), getDriverPayoutRequests(),
+          ]);
+          setWallet(w);
+          setWalletTransactions(wt || []);
+          setPayoutRequests(payouts || []);
         }
 
         /*
@@ -222,10 +228,11 @@ export default function Earnings() {
          * Uses driver wallet system.
          */
         else {
-          const [w, wt] =
+          const [w, wt, payouts] =
             await Promise.all([
               getDriverWallet(),
               getDriverWalletTransactions(),
+              getDriverPayoutRequests(),
             ]);
 
           setWallet(w);
@@ -233,6 +240,7 @@ export default function Earnings() {
           setWalletTransactions(
             wt || []
           );
+          setPayoutRequests(payouts || []);
 
           // Freelance drivers don't use
           // operator settlement.
@@ -329,6 +337,19 @@ export default function Earnings() {
     const start = new Date(now);
     start.setDate(now.getDate() - 7);
     return d <= now && d >= start;
+  };
+
+  const handleWithdraw = async (id) => {
+    setWithdrawId(id);
+    try {
+      await withdrawDriverPayout(id);
+      setPayoutMessage("Approved payout withdrawn successfully.");
+      await load();
+    } catch (error) {
+      setPayoutMessage(error?.response?.data?.message || error?.message || "Unable to withdraw payout.");
+    } finally {
+      setWithdrawId(null);
+    }
   };
 
 
@@ -744,7 +765,7 @@ export default function Earnings() {
           Request Payout
       ========================================== */}
 
-      {!operatorDriver && (
+      {wallet && (
         <Card className="earnings-card">
           <div className="earnings-card-header">
             <div>
@@ -846,6 +867,17 @@ export default function Earnings() {
                 balance until the payout is
                 processed.
               </p>
+
+              {payoutRequests.map((payout) => (
+                <p className="payout-message" key={payout.id}>
+                  {formatCurrency(payout.amount)}: {payout.status}
+                  {payout.status === "approved" && (
+                    <button type="button" className="payout-submit-button" disabled={withdrawId === payout.id} onClick={() => handleWithdraw(payout.id)}>
+                      {withdrawId === payout.id ? "Withdrawing..." : "Withdraw"}
+                    </button>
+                  )}
+                </p>
+              ))}
 
             </div>
           </div>

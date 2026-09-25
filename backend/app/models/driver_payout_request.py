@@ -20,7 +20,7 @@ class DriverPayoutRequest(db.Model, TimestampMixin):
     driver_id = db.Column(
         db.Integer,
         db.ForeignKey("drivers.id"),
-        nullable=False,
+        nullable=True,
         index=True,
     )
 
@@ -124,11 +124,13 @@ class DriverPayoutRequest(db.Model, TimestampMixin):
                 self.driver.user.full_name
                 if self.driver
                 and self.driver.user
-                else None
+                else self.operator.full_name if self.operator else None
             ),
 
             "driver_type": (
-                "operator"
+                "operator_wallet"
+                if self.driver_id is None and self.operator_id is not None
+                else "operator"
                 if self.operator_id is not None
                 else "freelance"
             ),

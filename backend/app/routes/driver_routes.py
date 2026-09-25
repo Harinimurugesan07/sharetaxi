@@ -66,3 +66,13 @@ driver_bp.add_url_rule(
     view_func=driver_controller.request_payout,
     methods=["POST"],
 )
+driver_bp.add_url_rule(
+    "/wallet/payouts",
+    view_func=driver_controller.payout_requests,
+    methods=["GET"],
+)
+driver_bp.add_url_rule(
+    "/wallet/payout/<string:payout_request_id>/withdraw",
+    view_func=driver_controller.withdraw_payout,
+    methods=["POST"],
+)

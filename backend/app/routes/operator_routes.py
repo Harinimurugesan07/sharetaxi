@@ -55,3 +55,13 @@ operator_bp.add_url_rule(
     view_func=operator_controller.wallet,
     methods=["GET"]
 )
+operator_bp.add_url_rule(
+    "/wallet/payout",
+    view_func=operator_controller.request_wallet_payout,
+    methods=["POST"]
+)
+operator_bp.add_url_rule(
+    "/wallet/payout/<string:payout_request_id>/withdraw",
+    view_func=operator_controller.withdraw_wallet_payout,
+    methods=["POST"]
+)
